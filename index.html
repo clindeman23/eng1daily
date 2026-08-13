@@ -384,7 +384,7 @@ function link(url, text){ return `<a class="reslink" target="_blank" rel="noopen
 
 // --- Rotation content ---
 // Fill these in as you write your pacing guide. Every field is optional per rotation —
-// leave one out and its section just shows "Nothing planned yet" to students. Nothing shows
+// leave one out and that section just doesn't show up for students at all. Nothing shows
 // to students until BOTH the rotation date arrives AND you've filled in that rotation here.
 //
 // Example of a fully filled-in rotation:
@@ -564,7 +564,8 @@ const ENGLISH_TRACKS = [
 function rotationBodyHTML(rot){
   let body = '';
   ENGLISH_TRACKS.forEach(t => {
-    body += `<div class="msection ${t.key}"><div class="mlabel">${t.label}</div><div>${rot[t.key] || 'Nothing planned yet — add this rotation’s content in the data.'}</div></div>`;
+    if(!rot[t.key]) return;
+    body += `<div class="msection ${t.key}"><div class="mlabel">${t.label}</div><div>${rot[t.key]}</div></div>`;
   });
   if(rot.activities && rot.activities.length){
     body += `<div class="msection activities"><div class="mlabel">📋 Other Activities</div><ul>`;
