@@ -375,10 +375,10 @@ footer{
 </div>
 
 <script>
-// Resource links pulled from the Google Doc's own hyperlinks
 // Resource links — add real URLs here as you get them (Google Docs, Canvas, Membean, etc.)
 const L = {
-  // example: syllabus: "https://docs.google.com/document/d/XXXX/edit",
+  syllabus: "https://canva.link/dnwcvrura12iade",
+  procedures: "https://canva.link/h52opnhneiz5yq2",
 };
 function link(url, text){ return `<a class="reslink" target="_blank" rel="noopener" href="${url}">${text}</a>`; }
 
@@ -396,7 +396,10 @@ function link(url, text){ return `<a class="reslink" target="_blank" rel="noopen
 //    activities:["Vocabulary review game", "Partner read-aloud"],
 //    tags:["goal","graded"]}
 const rotationsQ1 = [
-  {r:1, summary:"", tags:[]},
+  {r:1, summary:"Syllabus, classroom procedures, and Membean signup",
+   membean:"Sign up for Membean (our vocabulary program) and complete the account setup.",
+   activities:[`${link(L.syllabus,"Syllabus")} overview`, `${link(L.procedures,"Classroom Procedures")}`, "Syllabus AI activity"],
+   tags:[]},
   {r:2, summary:"", tags:[]},
   {r:3, summary:"", tags:[]},
   {r:4, summary:"", tags:[]},
