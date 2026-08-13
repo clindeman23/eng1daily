@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English I Student Guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231b3a2f'/%3E%3Ccircle cx='50' cy='50' r='24' fill='none' stroke='%23c9a227' stroke-width='9'/%3E%3C/svg%3E">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --ink:#1b3a2f;
+  --paper:#efe4c8;
+  --card:#fffbf0;
+  --text:#2e2418;
+  --muted:#7d735a;
+  --border:#ddd0a8;
+  --accent:#2f6b46;
+  --accent-dim:#e5ede2;
+  --red:#8b2e2e;
+  --red-dim:#f3e3e1;
+  --gold:#b8860b;
+  --teal:#3f7f6e;
+  --slate:#8a7f5f;
+  --shadow:0 1px 2px rgba(46,36,24,0.09), 0 3px 10px rgba(46,36,24,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Inter',sans-serif;color:var(--text);line-height:1.5;padding-bottom:60px;
+  background-color:var(--paper);
+  background-image:radial-gradient(circle, #2e241812 1.5px, transparent 1.5px);
+  background-size:24px 24px;
+}
+code, .mono{font-family:'Cinzel',serif;}
+
+/* Top stripe — a gilded border, like a map's edge */
+.topstripe{height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 20px,var(--ink) 20px 40px);}
+
+/* Header — an old leather-bound cover */
+header{background:var(--ink);color:#ecefe9;padding:22px 20px 20px;border-bottom:4px dashed #c9a22755;}
+.header-inner{max-width:1180px;margin:0 auto;}
+.winctl{display:flex;gap:9px;margin-bottom:16px;}
+.winctl .dot{width:13px;height:13px;border-radius:50%;display:inline-block;box-shadow:inset 0 -2px 0 rgba(0,0,0,0.18), 0 1px 1px rgba(0,0,0,0.2);}
+.winctl .dot.red{background:var(--red);}
+.winctl .dot.yellow{background:var(--gold);}
+.winctl .dot.green{background:var(--accent);}
+header h1{font-family:'Cinzel',serif;font-weight:700;font-size:1.5rem;color:#f4ecd0;letter-spacing:0.3px;}
+header p.sub{font-family:'Cinzel',serif;color:#c9a227;font-size:0.9rem;margin-top:6px;font-weight:600;}
+.cursor{display:inline-block;margin-left:3px;color:var(--gold);animation:blink 1.1s steps(1) infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+/* Quarter switcher */
+.quarter-switch{
+  display:flex;justify-content:center;gap:8px;background:#12281f;padding:12px;
+}
+.quarter-switch button{
+  border:2px solid #c9a22744;background:transparent;color:#d8cf9e;
+  font-family:'Cinzel',serif;font-weight:700;font-size:0.85rem;
+  padding:7px 24px;border-radius:999px;cursor:pointer;transition:all 0.15s;
+}
+.quarter-switch button:hover{border-color:var(--gold);color:#fff;}
+.quarter-switch button.active{background:var(--gold);border-color:var(--gold);color:#1b3a2f;}
+
+/* App tab nav — carved wooden tabs */
+nav.tabs{
+  position:sticky;top:0;z-index:50;background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:center;gap:6px;padding:8px 12px;flex-wrap:wrap;
+}
+nav.tabs button{
+  border:2px solid transparent;background:transparent;color:var(--muted);
+  font-family:'Cinzel',serif;font-weight:700;font-size:0.85rem;
+  padding:9px 20px;border-radius:999px;cursor:pointer;transition:all 0.15s;
+}
+nav.tabs button:hover{background:var(--accent-dim);color:var(--accent);}
+nav.tabs button.active{color:#fff;background:var(--accent);border-color:var(--accent);}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+.page{display:none;padding-top:24px;}
+.page.active{display:block;}
+.qtr-block{display:none;}
+.qtr-block.active{display:block;}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px;}
+.filters button{
+  border:1px solid var(--border);background:var(--card);color:var(--text);
+  padding:7px 14px;border-radius:6px;font-weight:700;font-size:0.78rem;
+  font-family:'Cinzel',serif;letter-spacing:0.2px;
+  cursor:pointer;transition:all 0.15s;
+}
+.filters button{border-radius:999px;}
+.filters button:hover{border-color:var(--accent);}
+.filters button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+h2.section-title{
+  font-family:'Cinzel',serif;color:var(--text);font-size:1.1rem;font-weight:700;
+  margin:0;padding-bottom:0;border-bottom:none;
+  display:flex;align-items:center;gap:8px;
+}
+h2.section-title::before{content:'📜';font-size:0.95em;}
+p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
+.section-title-row{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+
+/* Quick Links dashboard */
+.qlgroup{margin-bottom:30px;}
+.qlgroup h3{
+  font-family:'Cinzel',serif;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--muted);font-weight:700;margin-bottom:12px;
+}
+.qlgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:900px){.qlgrid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.qlgrid{grid-template-columns:1fr;}}
+.qltile{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;text-decoration:none;color:var(--text);
+  border-left:3px solid var(--slate);
+  transition:border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.qltile:hover{transform:translateX(2px);border-left-color:var(--accent);background:var(--accent-dim);}
+.qltile .qlicon{font-size:1.5rem;flex-shrink:0;width:32px;text-align:center;}
+.qltile .qllabel{font-weight:700;font-size:0.9rem;line-height:1.25;}
+.qltile .qlarrow{margin-left:auto;color:var(--muted);font-size:1.1rem;flex-shrink:0;}
+.qltile.c-grades{border-left-color:var(--accent);}
+
+/* Real calendar grid */
+.cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 22px;font-size:0.82rem;font-weight:600;color:var(--muted);}
+.cal-legend span{display:flex;align-items:center;gap:6px;}
+.cal-legend span:first-child{font-family:'Cinzel',serif;font-size:0.8rem;}
+.legend-swatch{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0;}
+.cal-months{display:flex;flex-direction:column;gap:32px;margin-bottom:28px;}
+.cal-month h3{font-family:'Cinzel',serif;color:var(--text);font-size:1.05rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.3px;}
+.month-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:18px;}
+.month-nav button{
+  border:1px solid var(--border);background:var(--card);color:var(--text);
+  width:34px;height:34px;border-radius:6px;font-size:1.1rem;font-weight:700;
+  cursor:pointer;transition:all 0.15s;
+}
+.month-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+.month-nav button:disabled{opacity:0.3;cursor:default;}
+.month-nav #month-label{
+  font-family:'Cinzel',serif;font-weight:700;font-size:1.05rem;
+  text-transform:uppercase;letter-spacing:0.3px;min-width:180px;text-align:center;
+}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;}
+.cal-weekdays span{text-align:center;font-family:'Cinzel',serif;font-size:0.66rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.cal-day{
+  aspect-ratio:1;border-radius:6px;border:1px solid var(--border);background:var(--card);
+  padding:6px 7px;display:flex;flex-direction:column;justify-content:space-between;
+  font-family:'Cinzel',serif;font-size:0.72rem;transition:transform 0.1s, opacity 0.15s;
+}
+.cal-day.empty{visibility:hidden;}
+.cal-day.weekend{background:#eef1f5;color:#a9b0bc;border-color:#e3e8f0;}
+.cal-day.out-of-range{background:#f8fafc;color:#cdd2db;}
+.cal-day .cd-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cal-day .cd-daynum{font-weight:700;}
+.cal-day .cd-badge{font-size:0.68rem;line-height:1;}
+.cal-day .cd-rnum{font-weight:700;font-size:0.64rem;align-self:flex-end;}
+.cal-day.has-rotation{cursor:pointer;}
+.cal-day.has-rotation:hover{transform:translateY(-2px);}
+.cal-day.dimmed{opacity:0.28;}
+.cal-day.locked-day{background:#eceff5 !important;border-color:#d8ddea !important;color:#9aa2ba !important;filter:blur(0.3px);}
+.cal-day.locked-day .cd-rnum{filter:blur(1.5px);opacity:0.7;}
+/* Rotation color cycle — color identifies WHICH rotation, not what kind of day */
+.cal-day.rc0{background:#f3e0df;border-color:#d9a8a5;color:#7a2e2e;}
+.cal-day.rc1{background:#f7edd2;border-color:#dfc47a;color:#8a6110;}
+.cal-day.rc2{background:#e2ecdf;border-color:#a8c79c;color:#2f6b46;}
+
+p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:auto;}
+.cal-day.split-day{background:repeating-linear-gradient(135deg, var(--card), var(--card) 6px, #f1f3f6 6px, #f1f3f6 12px);}
+.cal-day .cd-periods{font-size:0.6rem;color:inherit;opacity:0.8;}
+.picker-title{font-family:'Cinzel',serif;font-weight:700;font-size:1rem;margin-bottom:14px;padding-right:24px;}
+.picker-option{
+  display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--border);border-radius:8px;
+  padding:12px 14px;margin-bottom:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;
+}
+.picker-option:hover{border-color:var(--accent);background:var(--accent-dim);}
+.picker-option .po-title{font-family:'Cinzel',serif;font-weight:700;color:var(--text);margin-bottom:2px;}
+.picker-option .po-sub{font-size:0.82rem;color:var(--muted);}
+
+/* Grid / List view toggle */
+.view-toggle{display:flex;gap:8px;justify-content:center;margin-bottom:18px;}
+.view-toggle button{
+  border:1px solid var(--border);background:var(--card);color:var(--text);
+  padding:7px 16px;border-radius:6px;font-weight:700;font-size:0.78rem;
+  font-family:'Cinzel',serif;letter-spacing:0.2px;
+  cursor:pointer;transition:all 0.15s;
+}
+.view-toggle button:hover{border-color:var(--accent);}
+.view-toggle button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.cal-view{display:none;}
+.cal-view.active{display:block;}
+
+/* List view rows */
+.rlist{display:flex;flex-direction:column;gap:10px;}
+.list-row{
+  background:var(--card);border:1px solid var(--border);border-left:3px solid var(--slate);
+  border-radius:8px;box-shadow:var(--shadow);padding:12px 16px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  cursor:pointer;transition:transform 0.15s, border-color 0.15s;
+}
+.list-row:hover{transform:translateX(2px);border-left-color:var(--accent);}
+.list-row.rc0{border-left-color:#d9a8a5;}
+.list-row.rc1{border-left-color:#dfc47a;}
+.list-row.rc2{border-left-color:#a8c79c;}
+.list-row.hidden{display:none;}
+.list-row .lr-num{font-family:'Cinzel',serif;font-weight:700;color:var(--text);min-width:96px;flex-shrink:0;text-transform:uppercase;}
+.list-row .lr-date{font-family:'Cinzel',serif;color:var(--muted);font-weight:600;font-size:0.82rem;min-width:104px;flex-shrink:0;}
+.list-row .lr-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;}
+.list-row .lr-summary{flex-basis:100%;color:var(--muted);font-size:0.85rem;margin-top:2px;}
+.list-row.locked-row{background:#eceff5;opacity:0.75;}
+.list-row.locked-row .lr-num{color:var(--muted);}
+.list-row.locked-row .lr-summary-locked{filter:blur(1.2px);font-style:italic;}
+
+/* Rotation detail popup */
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(13,17,23,0.6);
+  z-index:200;align-items:center;justify-content:center;padding:20px;
+}
+.overlay.show{display:flex;}
+.modal{
+  background:var(--card);border-radius:10px;max-width:560px;width:100%;
+  max-height:85vh;overflow-y:auto;padding:26px 26px 22px;position:relative;
+  box-shadow:0 24px 60px rgba(13,17,23,0.4);border-left:3px solid var(--slate);
+}
+.modal.graded{border-left-color:var(--red);}
+.modal.checkin{border-left-color:var(--teal);}
+.modal.goal{border-left-color:var(--gold);}
+.modal.locked{border-left-color:var(--slate);}
+.locked-body{text-align:center;padding:20px 10px 6px;}
+.locked-body .locked-emoji{font-size:2.6rem;margin-bottom:10px;}
+.locked-body h4{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--text);margin-bottom:8px;}
+.locked-body p{color:var(--muted);font-size:0.95rem;}
+.modal .close{
+  position:absolute;top:14px;right:16px;background:none;border:none;
+  font-size:1.4rem;cursor:pointer;color:var(--muted);font-family:'Cinzel',serif;
+}
+.modal .cd-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;padding-right:24px;}
+.modal .cd-head h4{font-family:'Cinzel',serif;color:var(--text);font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
+.modal .cd-head .cd-date{font-family:'Cinzel',serif;color:var(--muted);font-weight:600;font-size:0.88rem;}
+.modal .cd-head .cd-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;}
+.pill{font-family:'Cinzel',serif;font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:4px;color:#fff;white-space:nowrap;}
+.pill.goal{background:var(--accent);}
+.pill.checkin{background:var(--teal);}
+.pill.graded{background:var(--red);}
+.msection{
+  margin-bottom:10px;padding:12px 14px;border-radius:8px;border:1px solid var(--border);
+}
+.msection:last-child{margin-bottom:0;}
+.msection .mlabel{
+  font-family:'Cinzel',serif;font-weight:700;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.5px;
+  display:flex;align-items:center;gap:6px;margin-bottom:6px;
+}
+.msection.grammar{background:#eef1f7;border-color:#c7d0e2;}
+.msection.grammar .mlabel{color:#4a5a80;}
+.msection.membean{background:#faf3df;border-color:#e8d69f;}
+.msection.membean .mlabel{color:var(--gold);}
+.msection.writing{background:#eef5ea;border-color:#c3dcb6;}
+.msection.writing .mlabel{color:var(--accent);}
+.msection.literature{background:#f7ecec;border-color:#e3c4c4;}
+.msection.literature .mlabel{color:var(--red);}
+.msection.activities{background:#f2ede0;border-color:#ddd0af;}
+.msection.activities .mlabel{color:var(--text);}
+.msection ul{padding-left:20px;}
+.msection li{margin-bottom:4px;font-size:0.92rem;}
+.reslink{
+  font-family:'Cinzel',serif;font-size:0.85em;font-weight:600;
+  background:#fff;color:var(--accent);border:1px solid var(--accent-dim);
+  padding:1px 6px;border-radius:4px;text-decoration:none;
+}
+.reslink:hover{background:var(--accent-dim);}
+
+footer{
+  text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;padding:0 20px;
+  font-family:'Cinzel',serif;
+}
+</style>
+</head>
+<body>
+
+<div class="topstripe"></div>
+<header>
+  <div class="header-inner">
+    <div class="winctl"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+    <h1>💍 English I — Student Guide</h1>
+    <p class="sub"><span id="qtr-label">Quarter 1</span> · 2026–2027<span class="cursor"> ⚔</span></p>
+  </div>
+</header>
+
+<div class="quarter-switch">
+  <button class="active" data-qtr="1">Quarter 1</button>
+  <button data-qtr="2">Quarter 2</button>
+</div>
+
+<nav class="tabs">
+  <button class="active" data-page="calendar">📅 Calendar</button>
+  <button data-page="gradesheets">📊 Grade Sheets</button>
+</nav>
+
+<div class="wrap">
+
+  <!-- CALENDAR -->
+  <div class="page active" id="page-calendar">
+    <div class="section-title-row">
+      <h2 class="section-title">Rotation Calendar</h2>
+    </div>
+
+    <p class="section-sub period-note">Your English class meets Periods 4 and 7. Days shown with two rotation numbers are shared between the two — click and pick which one you want. 🔒 Locked rotations haven't happened yet — they'll unlock on their start date. Rotations shown as <strong>TBD</strong> haven't been scheduled by the school yet.</p>
+
+    <div class="view-toggle">
+      <button class="active" data-view="grid">🔲 Grid View</button>
+      <button data-view="list">☰ List View</button>
+    </div>
+
+    <div class="filters">
+      <button class="active" data-filter="all">All Rotations</button>
+      <button data-filter="graded">🏆 Graded</button>
+      <button data-filter="checkin">📊 Check-ins</button>
+    </div>
+
+    <div class="cal-view active" id="view-grid">
+      <div class="cal-legend">
+        <span>📜 color = which rotation a day belongs to</span>
+        <span>🎯 Goal</span>
+        <span>📊 Check-in</span>
+        <span>🏆 Graded</span>
+        <span>🔒 Locked (not here yet)</span>
+        <span><span class="legend-swatch" style="background:#eef1f5;border:1px solid #e3e8f0;"></span>Weekend / no class</span>
+      </div>
+      <div class="month-nav">
+        <button id="month-prev" aria-label="Previous month">‹</button>
+        <span id="month-label" class="mono">August 2026</span>
+        <button id="month-next" aria-label="Next month">›</button>
+      </div>
+      <div class="cal-months" id="calendar"></div>
+    </div>
+
+    <div class="cal-view" id="view-list">
+      <div class="rlist" id="rotation-list"></div>
+    </div>
+  </div>
+
+  <!-- GRADE SHEETS -->
+  <div class="page" id="page-gradesheets">
+    <div class="qlgroup">
+      <h3>Quarter 1</h3>
+      <div class="qlgrid">
+        <a class="qltile c-grades" target="_blank" rel="noopener" href="#"><span class="qlicon">📊</span><span class="qllabel">Quarter 1 Gradesheet — add your link</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Quarter 2</h3>
+      <div class="qlgrid">
+        <a class="qltile c-grades" target="_blank" rel="noopener" href="#"><span class="qlicon">📊</span><span class="qllabel">Quarter 2 Gradesheet — add your link</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <p class="section-sub">Replace the placeholder <code>href="#"</code> links above with your real Google Sheet links once you have them.</p>
+  </div>
+
+
+</div>
+
+
+<footer>💍 English I · Mr. Lindeman · 2026–2027</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+// Resource links pulled from the Google Doc's own hyperlinks
+// Resource links — add real URLs here as you get them (Google Docs, Canvas, Membean, etc.)
+const L = {
+  // example: syllabus: "https://docs.google.com/document/d/XXXX/edit",
+};
+function link(url, text){ return `<a class="reslink" target="_blank" rel="noopener" href="${url}">${text}</a>`; }
+
+// --- Rotation content ---
+// Fill these in as you write your pacing guide. Every field is optional per rotation —
+// leave one out and its section just shows "Nothing planned yet" to students. Nothing shows
+// to students until BOTH the rotation date arrives AND you've filled in that rotation here.
+//
+// Example of a fully filled-in rotation:
+//   {r:3, summary:"Grammar quiz + start Chapter 4", goal:"85% on grammar quiz",
+//    grammar:"Unit 3 quiz on subject-verb agreement — review Membean words 1-20 first.",
+//    membean:"Complete Level 3 by Friday.",
+//    writing:"Draft paragraph 2 of the compare/contrast essay.",
+//    literature:`Read Chapters 3-4 of ${link(L.bookLink,"the class novel")}; discussion questions due next class.`,
+//    activities:["Vocabulary review game", "Partner read-aloud"],
+//    tags:["goal","graded"]}
+const rotationsQ1 = [
+  {r:1, summary:"", tags:[]},
+  {r:2, summary:"", tags:[]},
+  {r:3, summary:"", tags:[]},
+  {r:4, summary:"", tags:[]},
+  {r:5, summary:"", tags:[]},
+  {r:6, summary:"", tags:[]},
+  {r:7, summary:"", tags:[]},
+  {r:8, summary:"", tags:[]},
+  {r:9, summary:"", tags:[]},
+  {r:10, summary:"", tags:[]},
+  {r:11, summary:"", tags:[]},
+  {r:12, summary:"", tags:[]},
+  {r:13, summary:"", tags:[]},
+  {r:14, summary:"", tags:[]},
+  {r:15, summary:"", tags:[]},
+  {r:16, summary:"", tags:[]},
+  {r:17, summary:"", tags:[]},
+  {r:18, summary:"", tags:[]},
+  {r:19, summary:"", tags:[]},
+  {r:20, summary:"", tags:[]},
+];
+
+const rotationsQ2 = [
+  {r:1, summary:"", tags:[]},
+  {r:2, summary:"", tags:[]},
+  {r:3, summary:"", tags:[]},
+  {r:4, summary:"", tags:[]},
+  {r:5, summary:"", tags:[]},
+  {r:6, summary:"", tags:[]},
+  {r:7, summary:"", tags:[]},
+  {r:8, summary:"", tags:[]},
+  {r:9, summary:"", tags:[]},
+  {r:10, summary:"", tags:[]},
+  {r:11, summary:"", tags:[]},
+  {r:12, summary:"", tags:[]},
+  {r:13, summary:"", tags:[]},
+  {r:14, summary:"", tags:[]},
+  {r:15, summary:"", tags:[]},
+  {r:16, summary:"", tags:[]},
+  {r:17, summary:"", tags:[]},
+  {r:18, summary:"", tags:[]},
+  {r:19, summary:"", tags:[]},
+  {r:20, summary:"", tags:[]},
+];
+
+// --- Real per-rotation school days, from MCA's published class-rotation calendar ---
+// Each rotation spans 1-3 real school days, since only 4 of the 7 periods meet per day.
+// A rotation's day-list records exactly which periods met on each of its days. Some days
+// are shared between two rotations (e.g. periods 6-7 finish one rotation, 1-2 start the next) —
+// the calendar prompts which rotation to view when a day belongs to two.
+// Q1 is fully covered by the published calendar; Q2 is only published through Nov 9, 2026 so
+// far, so later rotations are partially or fully TBD until MCA publishes further out.
+const ROTATION_DAYS_Q1 = {"1":[{"date":"2026-08-13","periods":[1,2,3]},{"date":"2026-08-14","periods":[4,5,6,7]}],"2":[{"date":"2026-08-17","periods":[1,2,3,4]},{"date":"2026-08-18","periods":[5,6,7]}],"3":[{"date":"2026-08-18","periods":[1]},{"date":"2026-08-19","periods":[2,3,4,5]},{"date":"2026-08-20","periods":[6,7]}],"4":[{"date":"2026-08-20","periods":[1,2]},{"date":"2026-08-21","periods":[3,4,5,6]},{"date":"2026-08-24","periods":[7]}],"5":[{"date":"2026-08-24","periods":[1,2,3]},{"date":"2026-08-25","periods":[4,5,6,7]}],"6":[{"date":"2026-08-26","periods":[1,2,3,4]},{"date":"2026-08-27","periods":[5,6,7]}],"7":[{"date":"2026-08-27","periods":[1]},{"date":"2026-08-28","periods":[2,3,4,5]},{"date":"2026-08-31","periods":[6,7]}],"8":[{"date":"2026-08-31","periods":[1,2]},{"date":"2026-09-01","periods":[3,4,5,6]},{"date":"2026-09-02","periods":[7]}],"9":[{"date":"2026-09-02","periods":[1,2,3]},{"date":"2026-09-03","periods":[4,5,6,7]}],"10":[{"date":"2026-09-04","periods":[1,2]},{"date":"2026-09-08","periods":[3,4,5,6]},{"date":"2026-09-09","periods":[7]}],"11":[{"date":"2026-09-09","periods":[1,2,3]},{"date":"2026-09-10","periods":[4,5,6,7]}],"12":[{"date":"2026-09-11","periods":[1,2,3]},{"date":"2026-09-14","periods":[4,5,6,7]}],"13":[{"date":"2026-09-15","periods":[1,2,3,4]},{"date":"2026-09-16","periods":[5,6,7]}],"14":[{"date":"2026-09-16","periods":[1]},{"date":"2026-09-17","periods":[2,3,4,5]},{"date":"2026-09-18","periods":[6,7]}],"15":[{"date":"2026-09-18","periods":[1,2]},{"date":"2026-09-21","periods":[3,4,5,6]},{"date":"2026-09-22","periods":[7]}],"16":[{"date":"2026-09-22","periods":[1,2,3]},{"date":"2026-09-23","periods":[4,5,6,7]}],"17":[{"date":"2026-09-24","periods":[1,2,3,4]},{"date":"2026-09-25","periods":[5,6,7]}],"18":[{"date":"2026-09-25","periods":[1]},{"date":"2026-09-28","periods":[2,3,4,5]},{"date":"2026-09-29","periods":[6,7]}],"19":[{"date":"2026-09-29","periods":[1,2]},{"date":"2026-09-30","periods":[3,4,5,6]},{"date":"2026-10-01","periods":[7]}],"20":[{"date":"2026-10-01","periods":[1,2,3]},{"date":"2026-10-02","periods":[4,5,6,7]}]};
+const ROTATION_DAYS_Q2 = {"1":[{"date":"2026-10-13","periods":[1,5,6,7]},{"date":"2026-10-14","periods":[2,3,4]}],"2":[{"date":"2026-10-15","periods":[1,5,6,7]},{"date":"2026-10-16","periods":[2,3,4]}],"3":[{"date":"2026-10-16","periods":[5]},{"date":"2026-10-19","periods":[1,2,6,7]},{"date":"2026-10-20","periods":[3,4]}],"4":[{"date":"2026-10-20","periods":[5,6]},{"date":"2026-10-21","periods":[1,2,3,7]},{"date":"2026-10-22","periods":[4]}],"5":[{"date":"2026-10-22","periods":[5,6,7]},{"date":"2026-10-23","periods":[1,2,3]},{"date":"2026-10-26","periods":[4]}],"6":[{"date":"2026-10-26","periods":[5,6,7]},{"date":"2026-10-27","periods":[1,2,3,4]}],"7":[{"date":"2026-10-28","periods":[1,5,6,7]},{"date":"2026-10-29","periods":[2,3,4]}],"8":[{"date":"2026-10-29","periods":[5]},{"date":"2026-10-30","periods":[1,2,6,7]},{"date":"2026-11-02","periods":[3,4]}],"9":[{"date":"2026-11-02","periods":[5,6]},{"date":"2026-11-03","periods":[1,2,3,7]},{"date":"2026-11-04","periods":[4]}],"10":[{"date":"2026-11-04","periods":[5,6,7]},{"date":"2026-11-05","periods":[1,2,3,4]}],"11":[{"date":"2026-11-06","periods":[1,5,6,7]},{"date":"2026-11-09","periods":[2,3,4]}],"12":[{"date":"2026-11-09","periods":[5]}],"13":[],"14":[],"15":[],"16":[],"17":[],"18":[],"19":[],"20":[]};
+
+function dateKey(d){ return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; }
+function parseISODate(iso){
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function rotationDaysFor(quarter){ return quarter === 1 ? ROTATION_DAYS_Q1 : ROTATION_DAYS_Q2; }
+// English only meets Periods 4 and 7 — filter the master MCA schedule down to just those.
+const ENGLISH_PERIODS = [4, 7];
+function rotDaysForRotation(rot){
+  const days = rotationDaysFor(activeQuarter)[String(rot.r)] || [];
+  return days
+    .map(d => ({date: d.date, periods: d.periods.filter(p => ENGLISH_PERIODS.includes(p))}))
+    .filter(d => d.periods.length);
+}
+function rotDateLabel(rot){
+  const days = rotDaysForRotation(rot);
+  if(!days.length) return 'Date TBD';
+  return days.map(d => `${fmtDate(parseISODate(d.date))} (P${d.periods.join(',')})`).join(' · ');
+}
+
+// --- Rotations stay locked until their first real school day arrives ---
+function rotationUnlockDate(rot){
+  const days = rotDaysForRotation(rot);
+  if(!days.length) return null;
+  return parseISODate(days[0].date);
+}
+function isRotationUnlocked(rot){
+  const unlock = rotationUnlockDate(rot);
+  if(!unlock) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today >= unlock;
+}
+function unlockDateLabel(rot){
+  const unlock = rotationUnlockDate(rot);
+  return unlock ? fmtDate(unlock) : 'a date the school hasn’t set yet';
+}
+
+function processRotations(rots){
+  rots.forEach(rot => {
+    rot.status = rot.tags.includes('graded') ? 'graded' : rot.tags.includes('goal') ? 'goal' : rot.tags.includes('checkin') ? 'checkin' : 'plain';
+  });
+}
+function buildDayRotationMap(quarter){
+  const map = {}; // dateKey -> [{rotation, periods}, ...] (usually 1 entry, sometimes 2 on a shared day)
+  const rotationDays = rotationDaysFor(quarter);
+  Object.entries(rotationDays).forEach(([rotStr, days]) => {
+    const rotation = parseInt(rotStr, 10);
+    days.forEach(({date, periods}) => {
+      const relevant = periods.filter(p => ENGLISH_PERIODS.includes(p));
+      if(!relevant.length) return;
+      const key = dateKey(parseISODate(date));
+      if(!map[key]) map[key] = [];
+      map[key].push({rotation, periods: relevant});
+    });
+  });
+  return map;
+}
+
+processRotations(rotationsQ1);
+processRotations(rotationsQ2);
+
+// --- Quarter + month-page state ---
+let activeQuarter = 1;
+let currentMonthPos = 0;
+let currentFilter = 'all';
+function activeRotations(){ return activeQuarter === 1 ? rotationsQ1 : rotationsQ2; }
+function activeDayMap(){ return buildDayRotationMap(activeQuarter); }
+function activeMonths(){
+  const keys = Object.keys(activeDayMap());
+  if(!keys.length) return [{year: 2026, month: 7}];
+  const dates = keys.map(k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m, d); });
+  dates.sort((a, b) => a - b);
+  const first = dates[0], last = dates[dates.length - 1];
+  const months = [];
+  let y = first.getFullYear(), m = first.getMonth();
+  while(y < last.getFullYear() || (y === last.getFullYear() && m <= last.getMonth())){
+    months.push({year: y, month: m});
+    m++; if(m > 11){ m = 0; y++; }
+  }
+  return months;
+}
+
+const ROTATION_COLOR_COUNT = 3;
+function rotationColorClass(rot){ return 'rc' + ((rot.r - 1) % ROTATION_COLOR_COUNT); }
+function rotationBadge(rot){
+  if(rot.tags.includes('graded')) return '🏆';
+  if(rot.goal) return '🎯';
+  if(rot.tags.includes('checkin')) return '📊';
+  return '';
+}
+
+function rotationPillsHTML(rot){
+  let pills = '';
+  if(rot.goal) pills += `<span class="pill goal">🎯 ${rot.goal}</span>`;
+  if(rot.tags.includes('checkin')) pills += `<span class="pill checkin">📊 Check-in</span>`;
+  if(rot.tags.includes('graded')) pills += `<span class="pill graded">🏆 Graded</span>`;
+  return pills;
+}
+
+// The four English tracks — add real content per rotation in the rotationsQ1/Q2 arrays above.
+const ENGLISH_TRACKS = [
+  {key:'grammar', label:'📝 Grammar'},
+  {key:'membean', label:'🧠 Membean'},
+  {key:'writing', label:'✍️ Writing'},
+  {key:'literature', label:'📖 Literature'},
+];
+function rotationBodyHTML(rot){
+  let body = '';
+  ENGLISH_TRACKS.forEach(t => {
+    body += `<div class="msection ${t.key}"><div class="mlabel">${t.label}</div><div>${rot[t.key] || 'Nothing planned yet — add this rotation’s content in the data.'}</div></div>`;
+  });
+  if(rot.activities && rot.activities.length){
+    body += `<div class="msection activities"><div class="mlabel">📋 Other Activities</div><ul>`;
+    rot.activities.forEach(a => body += `<li>${a}</li>`);
+    body += `</ul></div>`;
+  }
+  return body;
+}
+
+const overlayEl = document.getElementById('overlay');
+const modalEl = document.getElementById('modal');
+function openModal(r){
+  const rot = activeRotations().find(x => x.r === r);
+  if(!rot) return;
+  if(!isRotationUnlocked(rot)){
+    modalEl.className = 'modal locked';
+    modalEl.innerHTML = `
+      <button class="close" onclick="closeModal()">✕</button>
+      <div class="locked-body">
+        <div class="locked-emoji">🔒</div>
+        <h4>Rotation ${rot.r} isn't unlocked yet</h4>
+        <p>This one shows up on <strong>${unlockDateLabel(rot)}</strong> — check back then!</p>
+      </div>
+    `;
+    overlayEl.classList.add('show');
+    return;
+  }
+  modalEl.className = 'modal ' + (rot.status !== 'plain' ? rot.status : '');
+  modalEl.innerHTML = `
+    <button class="close" onclick="closeModal()">✕</button>
+    <div class="cd-head">
+      <h4>Rotation ${rot.r}</h4>
+      <span class="cd-date">${rotDateLabel(rot)}</span>
+      <span class="cd-pills">${rotationPillsHTML(rot)}</span>
+    </div>
+    ${rotationBodyHTML(rot)}
+  `;
+  overlayEl.classList.add('show');
+}
+function closeModal(){ overlayEl.classList.remove('show'); }
+overlayEl.addEventListener('click', (e) => { if(e.target === overlayEl) closeModal(); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+// --- Render one month at a time ---
+const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MONTH_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function fmtDate(d){ return `${MONTH_ABBR[d.getMonth()]} ${d.getDate()}`; }
+const WEEKDAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const calEl = document.getElementById('calendar');
+const monthLabelEl = document.getElementById('month-label');
+const monthPrevBtn = document.getElementById('month-prev');
+const monthNextBtn = document.getElementById('month-next');
+
+function renderCalendarMonth(){
+  const months = activeMonths();
+  const {year, month: m} = months[currentMonthPos];
+  const dayMap = activeDayMap();
+  const daysInMonth = new Date(year, m + 1, 0).getDate();
+  const firstDow = new Date(year, m, 1).getDay();
+
+  let html = `<div class="cal-month">`;
+  html += `<div class="cal-weekdays">${WEEKDAY_LABELS.map(w => `<span>${w}</span>`).join('')}</div>`;
+  html += `<div class="cal-grid">`;
+  for(let i = 0; i < firstDow; i++) html += `<div class="cal-day empty"></div>`;
+  for(let day = 1; day <= daysInMonth; day++){
+    const d = new Date(year, m, day);
+    const dow = d.getDay();
+    const entries = dayMap[dateKey(d)];
+    if(dow === 0 || dow === 6){
+      html += `<div class="cal-day weekend"><span class="cd-daynum">${day}</span></div>`;
+    } else if(!entries || !entries.length){
+      html += `<div class="cal-day out-of-range"><span class="cd-daynum">${day}</span></div>`;
+    } else {
+      const isSplit = entries.length > 1;
+      const primary = activeRotations().find(x => x.r === entries[0].rotation);
+      const entryRots = entries.map(e => activeRotations().find(x => x.r === e.rotation));
+      const allLocked = entryRots.every(r => r && !isRotationUnlocked(r));
+      const badge = rotationBadge(primary);
+      const rLabel = entries.map(e => `R${e.rotation}`).join('/');
+      const periodsLabel = entries.map(e => `P${e.periods.join(',')}`).join(' · ');
+      const dataEntries = entries.map(e => `${e.rotation}:${e.periods.join(',')}`).join('|');
+      const tip = allLocked
+        ? `🔒 Locked — unlocks ${unlockDateLabel(primary)}`
+        : isSplit
+        ? `Shared day — ${entries.map(e => `Rotation ${e.rotation} (Periods ${e.periods.join(', ')})`).join(' & ')}`
+        : `Rotation ${primary.r}: ${primary.summary || ''}`;
+      html += `<div class="cal-day has-rotation ${rotationColorClass(primary)}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}" data-entries="${dataEntries}" title="${tip}">
+        <span class="cd-top"><span class="cd-daynum">${day}</span>${allLocked ? `<span class="cd-badge">🔒</span>` : (!isSplit && badge ? `<span class="cd-badge">${badge}</span>` : '')}</span>
+        <span class="cd-rnum">${allLocked ? '🔒' : rLabel}</span>
+        <span class="cd-periods">${allLocked ? '' : periodsLabel}</span>
+      </div>`;
+    }
+  }
+  html += `</div></div>`;
+  calEl.innerHTML = html;
+
+  monthLabelEl.textContent = `${MONTH_FULL[m]} ${year}`;
+  monthPrevBtn.disabled = currentMonthPos === 0;
+  monthNextBtn.disabled = currentMonthPos === months.length - 1;
+
+  applyFilter();
+}
+
+function parseCellEntries(str){
+  return str.split('|').map(s => {
+    const [r, p] = s.split(':');
+    return {rotation: parseInt(r, 10), periods: p.split(',').map(Number)};
+  });
+}
+
+function openDayPicker(entries){
+  modalEl.className = 'modal';
+  const options = entries.map(e => {
+    const rot = activeRotations().find(x => x.r === e.rotation);
+    const locked = !rot || !isRotationUnlocked(rot);
+    return `<button class="picker-option" data-rotation="${e.rotation}">
+      <div class="po-title">Rotation ${e.rotation} — Periods ${e.periods.join(', ')}${locked ? ' 🔒' : ''}</div>
+      <div class="po-sub">${locked ? `Unlocks ${unlockDateLabel(rot)}` : (rot ? rot.summary : '')}</div>
+    </button>`;
+  }).join('');
+  modalEl.innerHTML = `
+    <button class="close" onclick="closeModal()">✕</button>
+    <div class="picker-title">This day is shared between two rotations — which do you want to view?</div>
+    ${options}
+  `;
+  modalEl.querySelectorAll('.picker-option').forEach(btn => {
+    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.rotation, 10)));
+  });
+  overlayEl.classList.add('show');
+}
+
+calEl.addEventListener('click', (e) => {
+  const cell = e.target.closest('.cal-day.has-rotation');
+  if(!cell) return;
+  const entries = parseCellEntries(cell.dataset.entries);
+  if(entries.length === 1) openModal(entries[0].rotation);
+  else openDayPicker(entries);
+});
+
+monthPrevBtn.addEventListener('click', () => {
+  if(currentMonthPos > 0){ currentMonthPos--; renderCalendarMonth(); }
+});
+monthNextBtn.addEventListener('click', () => {
+  const months = activeMonths();
+  if(currentMonthPos < months.length - 1){ currentMonthPos++; renderCalendarMonth(); }
+});
+
+// --- Render the list view ---
+const listEl = document.getElementById('rotation-list');
+function renderList(){
+  listEl.innerHTML = '';
+  activeRotations().forEach(rot => {
+    const row = document.createElement('div');
+    const locked = !isRotationUnlocked(rot);
+    row.className = 'list-row ' + rotationColorClass(rot) + (locked ? ' locked-row' : '');
+    row.dataset.tags = rot.tags.join(',');
+    row.innerHTML = locked ? `
+      <span class="lr-num">Rotation ${rot.r} 🔒</span>
+      <span class="lr-date">Unlocks ${unlockDateLabel(rot)}</span>
+      <span class="lr-summary lr-summary-locked">This one's still under wraps — check back on its unlock date!</span>
+    ` : `
+      <span class="lr-num">Rotation ${rot.r}</span>
+      <span class="lr-date">${rotDateLabel(rot)}</span>
+      <span class="lr-pills">${rotationPillsHTML(rot)}</span>
+      ${rot.summary ? `<span class="lr-summary">${rot.summary}</span>` : ''}
+    `;
+    row.addEventListener('click', () => openModal(rot.r));
+    listEl.appendChild(row);
+  });
+  applyFilter();
+}
+
+function applyFilter(){
+  const f = currentFilter;
+  document.querySelectorAll('.cal-day.has-rotation').forEach(cell => {
+    const rot = activeRotations().find(x => x.r === parseInt(cell.dataset.rotation, 10));
+    cell.classList.toggle('dimmed', f !== 'all' && !rot.tags.includes(f));
+  });
+  document.querySelectorAll('.list-row').forEach(row => {
+    const tags = row.dataset.tags.split(',');
+    row.classList.toggle('hidden', f !== 'all' && !tags.includes(f));
+  });
+}
+
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    applyFilter();
+  });
+});
+
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.cal-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+  });
+});
+
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + btn.dataset.page).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.quarter-switch button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.quarter-switch button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeQuarter = parseInt(btn.dataset.qtr, 10);
+    document.getElementById('qtr-label').textContent = 'Quarter ' + activeQuarter;
+    currentMonthPos = 0;
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filters button[data-filter="all"]').classList.add('active');
+    currentFilter = 'all';
+    renderCalendarMonth();
+    renderList();
+    document.querySelectorAll('.qtr-block').forEach(el => {
+      el.classList.toggle('active', el.dataset.qtr === String(activeQuarter));
+    });
+  });
+});
+
+renderCalendarMonth();
+renderList();
+</script>
+
+</body>
+</html>
