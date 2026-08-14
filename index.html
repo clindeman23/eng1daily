@@ -6,7 +6,7 @@
 <title>English I Student Guide</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231b3a2f'/%3E%3Ccircle cx='50' cy='50' r='24' fill='none' stroke='%23c9a227' stroke-width='9'/%3E%3C/svg%3E">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
   --ink:#1b3a2f;
@@ -31,7 +31,7 @@ body{
   background-image:radial-gradient(circle, #2e241812 1.5px, transparent 1.5px);
   background-size:24px 24px;
 }
-code, .mono{font-family:'Cinzel',serif;}
+code, .mono{font-family:'Playfair Display',serif;}
 
 /* Top stripe — a gilded border, like a map's edge */
 .topstripe{height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 20px,var(--ink) 20px 40px);}
@@ -44,8 +44,8 @@ header{background:var(--ink);color:#ecefe9;padding:22px 20px 20px;border-bottom:
 .winctl .dot.red{background:var(--red);}
 .winctl .dot.yellow{background:var(--gold);}
 .winctl .dot.green{background:var(--accent);}
-header h1{font-family:'Cinzel',serif;font-weight:700;font-size:1.5rem;color:#f4ecd0;letter-spacing:0.3px;}
-header p.sub{font-family:'Cinzel',serif;color:#c9a227;font-size:0.9rem;margin-top:6px;font-weight:600;}
+header h1{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:#f4ecd0;letter-spacing:0.3px;}
+header p.sub{font-family:'Playfair Display',serif;color:#c9a227;font-size:0.9rem;margin-top:6px;font-weight:600;}
 .cursor{display:inline-block;margin-left:3px;color:var(--gold);animation:blink 1.1s steps(1) infinite;}
 @keyframes blink{50%{opacity:0;}}
 
@@ -55,7 +55,7 @@ header p.sub{font-family:'Cinzel',serif;color:#c9a227;font-size:0.9rem;margin-to
 }
 .quarter-switch button{
   border:2px solid #c9a22744;background:transparent;color:#d8cf9e;
-  font-family:'Cinzel',serif;font-weight:700;font-size:0.85rem;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
   padding:7px 24px;border-radius:999px;cursor:pointer;transition:all 0.15s;
 }
 .quarter-switch button:hover{border-color:var(--gold);color:#fff;}
@@ -69,7 +69,7 @@ nav.tabs{
 }
 nav.tabs button{
   border:2px solid transparent;background:transparent;color:var(--muted);
-  font-family:'Cinzel',serif;font-weight:700;font-size:0.85rem;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
   padding:9px 20px;border-radius:999px;cursor:pointer;transition:all 0.15s;
 }
 nav.tabs button:hover{background:var(--accent-dim);color:var(--accent);}
@@ -86,7 +86,7 @@ nav.tabs button.active{color:#fff;background:var(--accent);border-color:var(--ac
 .filters button{
   border:1px solid var(--border);background:var(--card);color:var(--text);
   padding:7px 14px;border-radius:6px;font-weight:700;font-size:0.78rem;
-  font-family:'Cinzel',serif;letter-spacing:0.2px;
+  font-family:'Playfair Display',serif;letter-spacing:0.2px;
   cursor:pointer;transition:all 0.15s;
 }
 .filters button{border-radius:999px;}
@@ -94,7 +94,7 @@ nav.tabs button.active{color:#fff;background:var(--accent);border-color:var(--ac
 .filters button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
 
 h2.section-title{
-  font-family:'Cinzel',serif;color:var(--text);font-size:1.1rem;font-weight:700;
+  font-family:'Playfair Display',serif;color:var(--text);font-size:1.1rem;font-weight:700;
   margin:0;padding-bottom:0;border-bottom:none;
   display:flex;align-items:center;gap:8px;
 }
@@ -104,11 +104,17 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
   margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border);
 }
+.today-btn{
+  border:2px solid var(--gold);background:var(--gold);color:#fff;
+  padding:9px 18px;border-radius:999px;font-weight:700;font-size:0.85rem;
+  font-family:'Playfair Display',serif;cursor:pointer;transition:all 0.15s;
+}
+.today-btn:hover{background:var(--ink);border-color:var(--ink);}
 
 /* Quick Links dashboard */
 .qlgroup{margin-bottom:30px;}
 .qlgroup h3{
-  font-family:'Cinzel',serif;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.8px;
+  font-family:'Playfair Display',serif;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.8px;
   color:var(--muted);font-weight:700;margin-bottom:12px;
 }
 .qlgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
@@ -130,10 +136,10 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 /* Real calendar grid */
 .cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 22px;font-size:0.82rem;font-weight:600;color:var(--muted);}
 .cal-legend span{display:flex;align-items:center;gap:6px;}
-.cal-legend span:first-child{font-family:'Cinzel',serif;font-size:0.8rem;}
+.cal-legend span:first-child{font-family:'Playfair Display',serif;font-size:0.8rem;}
 .legend-swatch{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0;}
 .cal-months{display:flex;flex-direction:column;gap:32px;margin-bottom:28px;}
-.cal-month h3{font-family:'Cinzel',serif;color:var(--text);font-size:1.05rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.3px;}
+.cal-month h3{font-family:'Playfair Display',serif;color:var(--text);font-size:1.05rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.3px;}
 .month-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:18px;}
 .month-nav button{
   border:1px solid var(--border);background:var(--card);color:var(--text);
@@ -143,16 +149,16 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 .month-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
 .month-nav button:disabled{opacity:0.3;cursor:default;}
 .month-nav #month-label{
-  font-family:'Cinzel',serif;font-weight:700;font-size:1.05rem;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;
   text-transform:uppercase;letter-spacing:0.3px;min-width:180px;text-align:center;
 }
 .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;}
-.cal-weekdays span{text-align:center;font-family:'Cinzel',serif;font-size:0.66rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.cal-weekdays span{text-align:center;font-family:'Playfair Display',serif;font-size:0.66rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
 .cal-day{
   aspect-ratio:1;border-radius:6px;border:1px solid var(--border);background:var(--card);
   padding:6px 7px;display:flex;flex-direction:column;justify-content:space-between;
-  font-family:'Cinzel',serif;font-size:0.72rem;transition:transform 0.1s, opacity 0.15s;
+  font-family:'Playfair Display',serif;font-size:0.72rem;transition:transform 0.1s, opacity 0.15s;
 }
 .cal-day.empty{visibility:hidden;}
 .cal-day.weekend{background:#eef1f5;color:#a9b0bc;border-color:#e3e8f0;}
@@ -174,13 +180,13 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:auto;}
 .cal-day.split-day{background:repeating-linear-gradient(135deg, var(--card), var(--card) 6px, #f1f3f6 6px, #f1f3f6 12px);}
 .cal-day .cd-periods{font-size:0.6rem;color:inherit;opacity:0.8;}
-.picker-title{font-family:'Cinzel',serif;font-weight:700;font-size:1rem;margin-bottom:14px;padding-right:24px;}
+.picker-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:14px;padding-right:24px;}
 .picker-option{
   display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--border);border-radius:8px;
   padding:12px 14px;margin-bottom:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;
 }
 .picker-option:hover{border-color:var(--accent);background:var(--accent-dim);}
-.picker-option .po-title{font-family:'Cinzel',serif;font-weight:700;color:var(--text);margin-bottom:2px;}
+.picker-option .po-title{font-family:'Playfair Display',serif;font-weight:700;color:var(--text);margin-bottom:2px;}
 .picker-option .po-sub{font-size:0.82rem;color:var(--muted);}
 
 /* Grid / List view toggle */
@@ -188,7 +194,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .view-toggle button{
   border:1px solid var(--border);background:var(--card);color:var(--text);
   padding:7px 16px;border-radius:6px;font-weight:700;font-size:0.78rem;
-  font-family:'Cinzel',serif;letter-spacing:0.2px;
+  font-family:'Playfair Display',serif;letter-spacing:0.2px;
   cursor:pointer;transition:all 0.15s;
 }
 .view-toggle button:hover{border-color:var(--accent);}
@@ -209,8 +215,8 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .list-row.rc1{border-left-color:#dfc47a;}
 .list-row.rc2{border-left-color:#a8c79c;}
 .list-row.hidden{display:none;}
-.list-row .lr-num{font-family:'Cinzel',serif;font-weight:700;color:var(--text);min-width:96px;flex-shrink:0;text-transform:uppercase;}
-.list-row .lr-date{font-family:'Cinzel',serif;color:var(--muted);font-weight:600;font-size:0.82rem;min-width:104px;flex-shrink:0;}
+.list-row .lr-num{font-family:'Playfair Display',serif;font-weight:700;color:var(--text);min-width:96px;flex-shrink:0;text-transform:uppercase;}
+.list-row .lr-date{font-family:'Playfair Display',serif;color:var(--muted);font-weight:600;font-size:0.82rem;min-width:104px;flex-shrink:0;}
 .list-row .lr-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;}
 .list-row .lr-summary{flex-basis:100%;color:var(--muted);font-size:0.85rem;margin-top:2px;}
 .list-row.locked-row{background:#eceff5;opacity:0.75;}
@@ -224,27 +230,65 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 }
 .overlay.show{display:flex;}
 .modal{
-  background:var(--card);border-radius:10px;max-width:560px;width:100%;
-  max-height:85vh;overflow-y:auto;padding:26px 26px 22px;position:relative;
-  box-shadow:0 24px 60px rgba(13,17,23,0.4);border-left:3px solid var(--slate);
+  background:var(--card);border-radius:18px;max-width:760px;width:100%;
+  max-height:92vh;overflow-y:auto;padding:34px 34px 28px;position:relative;
+  box-shadow:0 30px 80px rgba(27,58,47,0.45);border:3px solid var(--gold);
 }
-.modal.graded{border-left-color:var(--red);}
-.modal.checkin{border-left-color:var(--teal);}
-.modal.goal{border-left-color:var(--gold);}
-.modal.locked{border-left-color:var(--slate);}
+.modal.graded{border-color:var(--red);}
+.modal.checkin{border-color:var(--teal);}
+.modal.goal{border-color:var(--gold);}
+.modal.locked{border-color:var(--slate);}
 .locked-body{text-align:center;padding:20px 10px 6px;}
 .locked-body .locked-emoji{font-size:2.6rem;margin-bottom:10px;}
-.locked-body h4{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--text);margin-bottom:8px;}
+.locked-body h4{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);margin-bottom:8px;}
 .locked-body p{color:var(--muted);font-size:0.95rem;}
 .modal .close{
-  position:absolute;top:14px;right:16px;background:none;border:none;
-  font-size:1.4rem;cursor:pointer;color:var(--muted);font-family:'Cinzel',serif;
+  position:absolute;top:16px;right:18px;background:var(--accent-dim);border:2px solid var(--border);
+  width:36px;height:36px;border-radius:50%;
+  font-size:1.2rem;cursor:pointer;color:var(--text);font-family:'Playfair Display',serif;
+  transition:all 0.15s;
 }
+.modal .close:hover{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* Daily-slide header: big rotation + full date, made for projecting */
+.slide-head{text-align:center;margin-bottom:20px;padding-bottom:18px;border-bottom:3px double var(--gold);}
+.slide-head .slide-rot{
+  font-family:'Playfair Display',serif;font-weight:800;font-style:italic;color:var(--accent);
+  font-size:2.2rem;letter-spacing:0.3px;
+}
+.slide-head .slide-date{
+  font-family:'Playfair Display',serif;font-weight:600;color:var(--text);
+  font-size:1.3rem;margin-top:4px;
+}
+.slide-head .slide-periods{color:var(--muted);font-size:0.9rem;margin-top:2px;}
+.slide-head .cd-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+
+/* Saint of the day + quote of the day */
+.slide-feature{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px;}
+@media(max-width:640px){.slide-feature{grid-template-columns:1fr;}}
+.saint-card, .quote-card{
+  border-radius:12px;padding:16px 18px;border:2px solid var(--border);background:var(--accent-dim);
+}
+.saint-card{border-color:#d7cfa0;background:#faf3df;}
+.saint-card .sf-label, .quote-card .sf-label{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.72rem;text-transform:uppercase;
+  letter-spacing:0.6px;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:6px;
+}
+.saint-card .saint-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:4px;}
+.saint-card .saint-blurb{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.quote-card{background:#eef5ea;border-color:#c3dcb6;}
+.quote-card .sf-label{color:var(--accent);}
+.quote-card blockquote{
+  font-family:'Playfair Display',serif;font-style:italic;font-size:1.02rem;color:var(--text);
+  line-height:1.35;position:relative;padding-left:6px;
+}
+.quote-card .quote-author{margin-top:8px;font-size:0.82rem;color:var(--muted);font-weight:600;text-align:right;}
+
 .modal .cd-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;padding-right:24px;}
-.modal .cd-head h4{font-family:'Cinzel',serif;color:var(--text);font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
-.modal .cd-head .cd-date{font-family:'Cinzel',serif;color:var(--muted);font-weight:600;font-size:0.88rem;}
+.modal .cd-head h4{font-family:'Playfair Display',serif;color:var(--text);font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
+.modal .cd-head .cd-date{font-family:'Playfair Display',serif;color:var(--muted);font-weight:600;font-size:0.88rem;}
 .modal .cd-head .cd-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;}
-.pill{font-family:'Cinzel',serif;font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:4px;color:#fff;white-space:nowrap;}
+.pill{font-family:'Playfair Display',serif;font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:4px;color:#fff;white-space:nowrap;}
 .pill.goal{background:var(--accent);}
 .pill.checkin{background:var(--teal);}
 .pill.graded{background:var(--red);}
@@ -253,7 +297,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 }
 .msection:last-child{margin-bottom:0;}
 .msection .mlabel{
-  font-family:'Cinzel',serif;font-weight:700;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.5px;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.5px;
   display:flex;align-items:center;gap:6px;margin-bottom:6px;
 }
 .msection.grammar{background:#eef1f7;border-color:#c7d0e2;}
@@ -269,7 +313,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .msection ul{padding-left:20px;}
 .msection li{margin-bottom:4px;font-size:0.92rem;}
 .reslink{
-  font-family:'Cinzel',serif;font-size:0.85em;font-weight:600;
+  font-family:'Playfair Display',serif;font-size:0.85em;font-weight:600;
   background:#fff;color:var(--accent);border:1px solid var(--accent-dim);
   padding:1px 6px;border-radius:4px;text-decoration:none;
 }
@@ -277,7 +321,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 
 footer{
   text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;padding:0 20px;
-  font-family:'Cinzel',serif;
+  font-family:'Playfair Display',serif;
 }
 </style>
 </head>
@@ -308,6 +352,7 @@ footer{
   <div class="page active" id="page-calendar">
     <div class="section-title-row">
       <h2 class="section-title">Rotation Calendar</h2>
+      <button id="today-btn" class="today-btn">🍎 Today's Class</button>
     </div>
 
     <p class="section-sub period-note">Your English class meets Periods 4 and 7. Days shown with two rotation numbers are shared between the two — click and pick which one you want. 🔒 Locked rotations haven't happened yet — they'll unlock on their start date. Rotations shown as <strong>TBD</strong> haven't been scheduled by the school yet.</p>
@@ -554,6 +599,63 @@ function rotationPillsHTML(rot){
   return pills;
 }
 
+// --- Saint of the Day (Roman Catholic General Calendar), keyed "MM-DD" ---
+// Fill in as many dates as you like — any date not listed just shows the fallback message.
+const SAINTS = {
+  "08-14": {name: "St. Maximilian Kolbe", blurb: "A priest who volunteered to die in place of a stranger in a Nazi concentration camp — the ultimate act of love for a neighbor."},
+  "08-15": {name: "The Assumption of Mary", blurb: "A feast celebrating Mary being taken body and soul into heaven — one of the biggest Marian feast days of the year."},
+  "08-28": {name: "St. Augustine of Hippo", blurb: "A brilliant writer and bishop whose memoir, Confessions, is one of the first great works of Western literature."},
+};
+function saintForDate(d){
+  const key = `${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return SAINTS[key] || {name: "Ordinary Time", blurb: "No major feast today — just an ordinary, perfectly good day to be a saint yourself."};
+}
+
+// --- Literature Quote of the Day — all public-domain classics, one per calendar day ---
+const QUOTES = [
+  {text:"This above all: to thine own self be true.", author:"William Shakespeare", work:"Hamlet"},
+  {text:"We know what we are, but know not what we may be.", author:"William Shakespeare", work:"Hamlet"},
+  {text:"The fault, dear Brutus, is not in our stars, but in ourselves.", author:"William Shakespeare", work:"Julius Caesar"},
+  {text:"All the world's a stage, and all the men and women merely players.", author:"William Shakespeare", work:"As You Like It"},
+  {text:"It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.", author:"Jane Austen", work:"Pride and Prejudice"},
+  {text:"There is nothing I would not do for those who are really my friends.", author:"Jane Austen", work:"Emma"},
+  {text:"It was the best of times, it was the worst of times.", author:"Charles Dickens", work:"A Tale of Two Cities"},
+  {text:"No one is useless in this world who lightens the burdens of another.", author:"Charles Dickens", work:"Our Mutual Friend"},
+  {text:"The two most important days in your life are the day you are born and the day you find out why.", author:"Mark Twain"},
+  {text:"It's not the size of the dog in the fight, it's the size of the fight in the dog.", author:"Mark Twain"},
+  {text:"Do not go where the path may lead, go instead where there is no path and leave a trail.", author:"Ralph Waldo Emerson"},
+  {text:"The mass of men lead lives of quiet desperation.", author:"Henry David Thoreau", work:"Walden"},
+  {text:"Keep your face always toward the sunshine, and shadows will fall behind you.", author:"Walt Whitman"},
+  {text:"Hope is the thing with feathers that perches in the soul.", author:"Emily Dickinson"},
+  {text:"All that we see or seem is but a dream within a dream.", author:"Edgar Allan Poe"},
+  {text:"It is not down on any map; true places never are.", author:"Herman Melville", work:"Moby-Dick"},
+  {text:"Words, so innocent and powerless as they are, as standing in a dictionary, how potent for good and evil they become in the hands of one who knows how to combine them.", author:"Nathaniel Hawthorne"},
+  {text:"I am no bird; and no net ensnares me: I am a free human being with an independent will.", author:"Charlotte Brontë", work:"Jane Eyre"},
+  {text:"Whatever our souls are made of, his and mine are the same.", author:"Emily Brontë", work:"Wuthering Heights"},
+  {text:"I am not afraid of storms, for I am learning how to sail my ship.", author:"Louisa May Alcott", work:"Little Women"},
+  {text:"Be yourself; everyone else is already taken.", author:"Oscar Wilde"},
+  {text:"We are all in the gutter, but some of us are looking at the stars.", author:"Oscar Wilde", work:"Lady Windermere's Fan"},
+  {text:"If you can keep your head when all about you are losing theirs...", author:"Rudyard Kipling", work:"If—"},
+  {text:"Once you learn to read, you will be forever free.", author:"Frederick Douglass"},
+  {text:"Two roads diverged in a wood, and I— I took the one less traveled by, and that has made all the difference.", author:"Robert Frost", work:"The Road Not Taken"},
+  {text:"Nothing vast enters the life of mortals without a curse.", author:"Sophocles", work:"Antigone"},
+  {text:"It's no use going back to yesterday, because I was a different person then.", author:"Lewis Carroll", work:"Alice's Adventures in Wonderland"},
+  {text:"Little minds are tamed and subdued by misfortune; but great minds rise above it.", author:"Washington Irving"},
+  {text:"A thing of beauty is a joy forever.", author:"John Keats", work:"Endymion"},
+  {text:"Poets are the unacknowledged legislators of the world.", author:"Percy Bysshe Shelley", work:"A Defence of Poetry"},
+  {text:"'Tis better to have loved and lost than never to have loved at all.", author:"Alfred, Lord Tennyson", work:"In Memoriam"},
+  {text:"How do I love thee? Let me count the ways.", author:"Elizabeth Barrett Browning", work:"Sonnet 43"},
+  {text:"Success is to be measured not so much by the position that one has reached in life as by the obstacles overcome.", author:"Booker T. Washington"},
+  {text:"Fate often saves an undoomed man when his courage is good.", author:"Beowulf (trans.)"},
+  {text:"Nothing in the world is single; all things by a law divine in one another's being mingle.", author:"Percy Bysshe Shelley", work:"Love's Philosophy"},
+  {text:"The world is too much with us; late and soon, getting and spending, we lay waste our powers.", author:"William Wordsworth"},
+];
+function dayOfYear(d){
+  const start = new Date(d.getFullYear(), 0, 0);
+  return Math.floor((d - start) / 86400000);
+}
+function quoteForDate(d){ return QUOTES[dayOfYear(d) % QUOTES.length]; }
+
 // The four English tracks — add real content per rotation in the rotationsQ1/Q2 arrays above.
 const ENGLISH_TRACKS = [
   {key:'grammar', label:'📝 Grammar'},
@@ -593,13 +695,29 @@ function openModal(r){
     overlayEl.classList.add('show');
     return;
   }
+  const today = new Date();
+  const saint = saintForDate(today);
+  const quote = quoteForDate(today);
   modalEl.className = 'modal ' + (rot.status !== 'plain' ? rot.status : '');
   modalEl.innerHTML = `
     <button class="close" onclick="closeModal()">✕</button>
-    <div class="cd-head">
-      <h4>Rotation ${rot.r}</h4>
-      <span class="cd-date">${rotDateLabel(rot)}</span>
-      <span class="cd-pills">${rotationPillsHTML(rot)}</span>
+    <div class="slide-head">
+      <div class="slide-rot">📖 Rotation ${rot.r}</div>
+      <div class="slide-date">${fmtFullDate(today)}</div>
+      <div class="slide-periods">${rotDateLabel(rot)}</div>
+      <div class="cd-pills">${rotationPillsHTML(rot)}</div>
+    </div>
+    <div class="slide-feature">
+      <div class="saint-card">
+        <div class="sf-label">✝️ Saint of the Day</div>
+        <div class="saint-name">${saint.name}</div>
+        <div class="saint-blurb">${saint.blurb}</div>
+      </div>
+      <div class="quote-card">
+        <div class="sf-label">🖋️ Quote of the Day</div>
+        <blockquote>“${quote.text}”</blockquote>
+        <div class="quote-author">— ${quote.author}${quote.work ? `, <em>${quote.work}</em>` : ''}</div>
+      </div>
     </div>
     ${rotationBodyHTML(rot)}
   `;
@@ -609,11 +727,40 @@ function closeModal(){ overlayEl.classList.remove('show'); }
 overlayEl.addEventListener('click', (e) => { if(e.target === overlayEl) closeModal(); });
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
+// --- One-click "Today's Class" for projecting in the classroom ---
+function findRotationForDate(date){
+  const key = dateKey(date);
+  for(const q of [1, 2]){
+    const entries = buildDayRotationMap(q)[key];
+    if(entries && entries.length) return {quarter: q, rotation: entries[0].rotation};
+  }
+  return null;
+}
+document.getElementById('today-btn').addEventListener('click', () => {
+  const found = findRotationForDate(new Date());
+  if(!found){
+    alert("No class is scheduled for today in either quarter's calendar yet.");
+    return;
+  }
+  if(found.quarter !== activeQuarter){
+    activeQuarter = found.quarter;
+    document.querySelectorAll('.quarter-switch button').forEach(b => b.classList.toggle('active', parseInt(b.dataset.qtr, 10) === activeQuarter));
+    document.getElementById('qtr-label').textContent = 'Quarter ' + activeQuarter;
+    document.querySelectorAll('.qtr-block').forEach(el => el.classList.toggle('active', el.dataset.qtr === String(activeQuarter)));
+    currentMonthPos = 0;
+    renderCalendarMonth();
+    renderList();
+  }
+  openModal(found.rotation);
+});
+
 // --- Render one month at a time ---
 const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTH_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function fmtDate(d){ return `${MONTH_ABBR[d.getMonth()]} ${d.getDate()}`; }
 const WEEKDAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const WEEKDAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function fmtFullDate(d){ return `${WEEKDAY_FULL[d.getDay()]}, ${MONTH_FULL[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`; }
 const calEl = document.getElementById('calendar');
 const monthLabelEl = document.getElementById('month-label');
 const monthPrevBtn = document.getElementById('month-prev');
