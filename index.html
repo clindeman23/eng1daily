@@ -264,7 +264,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .slide-head .cd-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 
 /* Saint of the day + quote of the day */
-.slide-feature{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px;}
+.slide-feature{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
 @media(max-width:640px){.slide-feature{grid-template-columns:1fr;}}
 .saint-card, .quote-card{
   border-radius:12px;padding:16px 18px;border:2px solid var(--border);background:var(--accent-dim);
@@ -1008,9 +1008,22 @@ function rotationBodyHTML(rot){
   return body;
 }
 
+// The full school day's period rotation (all periods meeting that day, not just 4 & 7) —
+// looked up straight from the unfiltered MCA master schedule for a specific calendar date.
+function fullPeriodsForDate(date, quarter){
+  const key = dateKey(date);
+  const rotationDays = rotationDaysFor(quarter);
+  for(const days of Object.values(rotationDays)){
+    for(const d of days){
+      if(dateKey(parseISODate(d.date)) === key) return d.periods;
+    }
+  }
+  return null;
+}
+
 const overlayEl = document.getElementById('overlay');
 const modalEl = document.getElementById('modal');
-function openModal(r){
+function openModal(r, dateOverride){
   const rot = activeRotations().find(x => x.r === r);
   if(!rot) return;
   if(!isRotationUnlocked(rot)){
@@ -1026,18 +1039,20 @@ function openModal(r){
     overlayEl.classList.add('show');
     return;
   }
-  const today = new Date();
+  const today = dateOverride || new Date();
   const saint = saintForDate(today);
   const quote = quoteForDate(today);
+  const fullPeriods = fullPeriodsForDate(today, activeQuarter);
   modalEl.className = 'modal ' + (rot.status !== 'plain' ? rot.status : '');
   modalEl.innerHTML = `
     <button class="close" onclick="closeModal()">✕</button>
     <div class="slide-head">
       <div class="slide-rot">📖 Rotation ${rot.r}</div>
       <div class="slide-date">${fmtFullDate(today)}</div>
-      <div class="slide-periods">${rotDateLabel(rot)}</div>
+      <div class="slide-periods">${fullPeriods ? `Today's Periods: ${fullPeriods.join(', ')}` : rotDateLabel(rot)}</div>
       <div class="cd-pills">${rotationPillsHTML(rot)}</div>
     </div>
+    ${rotationBodyHTML(rot)}
     <div class="slide-feature">
       <div class="saint-card">
         <div class="sf-label">✝️ Saint of the Day</div>
@@ -1050,7 +1065,6 @@ function openModal(r){
         <div class="quote-author">— ${quote.author}${quote.work ? `, <em>${quote.work}</em>` : ''}</div>
       </div>
     </div>
-    ${rotationBodyHTML(rot)}
   `;
   overlayEl.classList.add('show');
 }
@@ -1082,7 +1096,7 @@ document.getElementById('today-btn').addEventListener('click', () => {
     renderCalendarMonth();
     renderList();
   }
-  openModal(found.rotation);
+  openModal(found.rotation, new Date());
 });
 
 // --- Render one month at a time ---
@@ -1125,12 +1139,13 @@ function renderCalendarMonth(){
       const rLabel = entries.map(e => `R${e.rotation}`).join('/');
       const periodsLabel = entries.map(e => `P${e.periods.join(',')}`).join(' · ');
       const dataEntries = entries.map(e => `${e.rotation}:${e.periods.join(',')}`).join('|');
+      const isoDate = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const tip = allLocked
         ? `🔒 Locked — unlocks ${unlockDateLabel(primary)}`
         : isSplit
         ? `Shared day — ${entries.map(e => `Rotation ${e.rotation} (Periods ${e.periods.join(', ')})`).join(' & ')}`
         : `Rotation ${primary.r}: ${primary.summary || ''}`;
-      html += `<div class="cal-day has-rotation ${rotationColorClass(primary)}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}" data-entries="${dataEntries}" title="${tip}">
+      html += `<div class="cal-day has-rotation ${rotationColorClass(primary)}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}" data-entries="${dataEntries}" data-date="${isoDate}" title="${tip}">
         <span class="cd-top"><span class="cd-daynum">${day}</span>${allLocked ? `<span class="cd-badge">🔒</span>` : (!isSplit && badge ? `<span class="cd-badge">${badge}</span>` : '')}</span>
         <span class="cd-rnum">${allLocked ? '🔒' : rLabel}</span>
         <span class="cd-periods">${allLocked ? '' : periodsLabel}</span>
@@ -1154,7 +1169,7 @@ function parseCellEntries(str){
   });
 }
 
-function openDayPicker(entries){
+function openDayPicker(entries, date){
   modalEl.className = 'modal';
   const options = entries.map(e => {
     const rot = activeRotations().find(x => x.r === e.rotation);
@@ -1170,7 +1185,7 @@ function openDayPicker(entries){
     ${options}
   `;
   modalEl.querySelectorAll('.picker-option').forEach(btn => {
-    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.rotation, 10)));
+    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.rotation, 10), date));
   });
   overlayEl.classList.add('show');
 }
@@ -1179,8 +1194,9 @@ calEl.addEventListener('click', (e) => {
   const cell = e.target.closest('.cal-day.has-rotation');
   if(!cell) return;
   const entries = parseCellEntries(cell.dataset.entries);
-  if(entries.length === 1) openModal(entries[0].rotation);
-  else openDayPicker(entries);
+  const date = cell.dataset.date ? parseISODate(cell.dataset.date) : undefined;
+  if(entries.length === 1) openModal(entries[0].rotation, date);
+  else openDayPicker(entries, date);
 });
 
 monthPrevBtn.addEventListener('click', () => {
