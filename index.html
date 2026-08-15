@@ -163,6 +163,9 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 .cal-day.empty{visibility:hidden;}
 .cal-day.weekend{background:#eef1f5;color:#a9b0bc;border-color:#e3e8f0;}
 .cal-day.out-of-range{background:#f8fafc;color:#cdd2db;}
+.cal-day.special-day{cursor:pointer;background:#f2ede0;border-color:#ddd0af;color:var(--muted);}
+.cal-day.special-day:hover{transform:translateY(-2px);}
+.cal-day.special-day .cd-badge{font-size:0.68rem;line-height:1;}
 .cal-day .cd-top{display:flex;justify-content:space-between;align-items:flex-start;}
 .cal-day .cd-daynum{font-weight:700;}
 .cal-day .cd-badge{font-size:0.68rem;line-height:1;}
@@ -500,6 +503,17 @@ const ROTATION_DAYS_Q1 = {"1":[{"date":"2026-08-13","periods":[1,2,3]},{"date":"
 const ROTATION_DAYS_Q2 = {"1":[{"date":"2026-10-05","periods":[1,2,3,4]},{"date":"2026-10-06","periods":[5,6,7]}],"2":[{"date":"2026-10-06","periods":[1]},{"date":"2026-10-08","periods":[2,3,4]},{"date":"2026-10-13","periods":[5,6,7]}],"3":[{"date":"2026-10-13","periods":[1]},{"date":"2026-10-14","periods":[2,3,4]},{"date":"2026-10-15","periods":[5,6,7]}],"4":[{"date":"2026-10-15","periods":[1]},{"date":"2026-10-16","periods":[2,3,4,5]},{"date":"2026-10-19","periods":[6,7]}],"5":[{"date":"2026-10-19","periods":[1,2]},{"date":"2026-10-20","periods":[3,4,5,6]},{"date":"2026-10-21","periods":[7]}],"6":[{"date":"2026-10-21","periods":[1,2,3]},{"date":"2026-10-22","periods":[4,5,6,7]}],"7":[{"date":"2026-10-23","periods":[1,2,3]},{"date":"2026-10-26","periods":[4,5,6,7]}],"8":[{"date":"2026-10-27","periods":[1,2,3,4]},{"date":"2026-10-28","periods":[5,6,7]}],"9":[{"date":"2026-10-28","periods":[1]},{"date":"2026-10-29","periods":[2,3,4,5]},{"date":"2026-10-30","periods":[6,7]}],"10":[{"date":"2026-10-30","periods":[1,2]},{"date":"2026-11-02","periods":[3,4,5,6]},{"date":"2026-11-03","periods":[7]}],"11":[{"date":"2026-11-03","periods":[1,2,3]},{"date":"2026-11-04","periods":[4,5,6,7]}],"12":[{"date":"2026-11-05","periods":[1,2,3,4]},{"date":"2026-11-06","periods":[5,6,7]}],"13":[{"date":"2026-11-06","periods":[1]},{"date":"2026-11-09","periods":[2,3,4,5]},{"date":"2026-11-10","periods":[6,7]}],"14":[{"date":"2026-11-10","periods":[1,2]},{"date":"2026-11-11","periods":[3,4,5,6]},{"date":"2026-11-12","periods":[7]}],"15":[{"date":"2026-11-12","periods":[1,2,3]},{"date":"2026-11-13","periods":[4,5,6]},{"date":"2026-11-16","periods":[7]}],"16":[{"date":"2026-11-16","periods":[1,2,3]},{"date":"2026-11-17","periods":[4,5,6,7]}],"17":[{"date":"2026-11-18","periods":[1,2,3,4]},{"date":"2026-11-19","periods":[5,6,7]}],"18":[{"date":"2026-11-19","periods":[1]},{"date":"2026-11-20","periods":[2,3]},{"date":"2026-11-30","periods":[4,5,6,7]}],"19":[{"date":"2026-12-01","periods":[1,2,3,4]},{"date":"2026-12-02","periods":[5,6,7]}],"20":[{"date":"2026-12-02","periods":[1]},{"date":"2026-12-03","periods":[2,3,4,5]},{"date":"2026-12-04","periods":[6,7]}]};
 
 function dateKey(d){ return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; }
+
+// Real school days with no regular period rotation — testing/exam schedules instead.
+const SPECIAL_DAYS = {
+  "2026-9-7": {icon: "📝", label: "Standardized Test Day", note: "No regular class periods today — students follow a special testing schedule."},
+  "2026-11-9": {icon: "📚", label: "Exam Day", note: "Final exams today — no regular class periods."},
+  "2026-11-10": {icon: "📚", label: "Exam Day", note: "Final exams today — no regular class periods."},
+  "2026-11-11": {icon: "📚", label: "Exam Day", note: "Final exams today — no regular class periods."},
+  "2026-11-14": {icon: "📚", label: "Exam Day", note: "Final exams today — no regular class periods."},
+  "2026-11-15": {icon: "📚", label: "Exam Day", note: "Final exams today — no regular class periods."},
+};
+function specialDayFor(d){ return SPECIAL_DAYS[dateKey(d)] || null; }
 function parseISODate(iso){
   const [y, m, d] = iso.split('-').map(Number);
   return new Date(y, m - 1, d);
@@ -1069,6 +1083,18 @@ function openModal(r, dateOverride){
   overlayEl.classList.add('show');
 }
 function closeModal(){ overlayEl.classList.remove('show'); }
+function openSpecialModal(special){
+  modalEl.className = 'modal';
+  modalEl.innerHTML = `
+    <button class="close" onclick="closeModal()">✕</button>
+    <div class="locked-body">
+      <div class="locked-emoji">${special.icon}</div>
+      <h4>${special.label}</h4>
+      <p>${special.note}</p>
+    </div>
+  `;
+  overlayEl.classList.add('show');
+}
 overlayEl.addEventListener('click', (e) => { if(e.target === overlayEl) closeModal(); });
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
@@ -1126,8 +1152,13 @@ function renderCalendarMonth(){
     const d = new Date(year, m, day);
     const dow = d.getDay();
     const entries = dayMap[dateKey(d)];
+    const special = specialDayFor(d);
     if(dow === 0 || dow === 6){
       html += `<div class="cal-day weekend"><span class="cd-daynum">${day}</span></div>`;
+    } else if(special){
+      html += `<div class="cal-day special-day" data-special-date="${dateKey(d)}" title="${special.label}">
+        <span class="cd-top"><span class="cd-daynum">${day}</span><span class="cd-badge">${special.icon}</span></span>
+      </div>`;
     } else if(!entries || !entries.length){
       html += `<div class="cal-day out-of-range"><span class="cd-daynum">${day}</span></div>`;
     } else {
@@ -1191,6 +1222,11 @@ function openDayPicker(entries, date){
 }
 
 calEl.addEventListener('click', (e) => {
+  const specialCell = e.target.closest('.cal-day.special-day');
+  if(specialCell){
+    openSpecialModal(SPECIAL_DAYS[specialCell.dataset.specialDate]);
+    return;
+  }
   const cell = e.target.closest('.cal-day.has-rotation');
   if(!cell) return;
   const entries = parseCellEntries(cell.dataset.entries);
