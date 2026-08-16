@@ -398,7 +398,7 @@ footer{
     <div class="qlgroup">
       <h3>Quarter 1</h3>
       <div class="qlgrid">
-        <a class="qltile c-grades" target="_blank" rel="noopener" href="#"><span class="qlicon">📊</span><span class="qllabel">Quarter 1 Gradesheet — add your link</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-grades" target="_blank" rel="noopener" href="https://docs.google.com/document/d/16G_RaeD9ey-c8nAPUXiAbGQgiQzeGyYpNJfnQ_t1zGs/edit?usp=sharing"><span class="qlicon">📊</span><span class="qllabel">Quarter 1 Gradesheet</span><span class="qlarrow">↗</span></a>
       </div>
     </div>
 
@@ -427,6 +427,9 @@ footer{
 const L = {
   syllabus: "https://canva.link/dnwcvrura12iade",
   procedures: "https://canva.link/h52opnhneiz5yq2",
+  membeanIntro: "https://vimeo.com/405243332/66aca78165",
+  summerReadingOrganizer: "https://docs.google.com/document/d/18faVWPLwLU6_c56V4GqR4Ybk259_18BbJkVtOj-hKj8/edit?usp=sharing",
+  gradesheetQ1: "https://docs.google.com/document/d/16G_RaeD9ey-c8nAPUXiAbGQgiQzeGyYpNJfnQ_t1zGs/edit?usp=sharing",
 };
 function link(url, text){ return `<a class="reslink" target="_blank" rel="noopener" href="${url}">${text}</a>`; }
 
@@ -448,7 +451,11 @@ const rotationsQ1 = [
    membean:"Sign up for Membean (our vocabulary program) and complete the account setup.",
    activities:[`${link(L.syllabus,"Syllabus")} overview`, `${link(L.procedures,"Classroom Procedures")}`, "Syllabus AI activity"],
    tags:[]},
-  {r:2, summary:"", tags:[]},
+  {r:2, summary:"Membean practice, Summer Reading essay begins, Letters to Self",
+   membean:`Watch the ${link(L.membeanIntro,"Membean intro video")}, then train/practice for 15 minutes.`,
+   writing:`Start the Summer Reading essay, using this ${link(L.summerReadingOrganizer,"graphic organizer")}.`,
+   activities:["Finish Letters to Self", "If time: submit/present the AI Syllabus assignment"],
+   tags:[]},
   {r:3, summary:"", tags:[]},
   {r:4, summary:"", tags:[]},
   {r:5, summary:"", tags:[]},
