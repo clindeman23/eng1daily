@@ -81,18 +81,6 @@ nav.tabs button.active{color:#fff;background:var(--accent);border-color:var(--ac
 .qtr-block{display:none;}
 .qtr-block.active{display:block;}
 
-/* Filters */
-.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px;}
-.filters button{
-  border:1px solid var(--border);background:var(--card);color:var(--text);
-  padding:7px 14px;border-radius:6px;font-weight:700;font-size:0.78rem;
-  font-family:'Playfair Display',serif;letter-spacing:0.2px;
-  cursor:pointer;transition:all 0.15s;
-}
-.filters button{border-radius:999px;}
-.filters button:hover{border-color:var(--accent);}
-.filters button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-
 h2.section-title{
   font-family:'Playfair Display',serif;color:var(--text);font-size:1.1rem;font-weight:700;
   margin:0;padding-bottom:0;border-bottom:none;
@@ -365,18 +353,9 @@ footer{
       <button data-view="list">☰ List View</button>
     </div>
 
-    <div class="filters">
-      <button class="active" data-filter="all">All Rotations</button>
-      <button data-filter="graded">🏆 Graded</button>
-      <button data-filter="checkin">📊 Check-ins</button>
-    </div>
-
     <div class="cal-view active" id="view-grid">
       <div class="cal-legend">
-        <span>📜 color = which rotation a day belongs to</span>
         <span>🎯 Goal</span>
-        <span>📊 Check-in</span>
-        <span>🏆 Graded</span>
         <span>🔒 Locked (not here yet)</span>
         <span><span class="legend-swatch" style="background:#eef1f5;border:1px solid #e3e8f0;"></span>Weekend / no class</span>
       </div>
@@ -1292,15 +1271,6 @@ function applyFilter(){
   });
 }
 
-document.querySelectorAll('.filters button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    applyFilter();
-  });
-});
-
 document.querySelectorAll('.view-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
@@ -1326,9 +1296,6 @@ document.querySelectorAll('.quarter-switch button').forEach(btn => {
     activeQuarter = parseInt(btn.dataset.qtr, 10);
     document.getElementById('qtr-label').textContent = 'Quarter ' + activeQuarter;
     currentMonthPos = 0;
-    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
-    document.querySelector('.filters button[data-filter="all"]').classList.add('active');
-    currentFilter = 'all';
     renderCalendarMonth();
     renderList();
     document.querySelectorAll('.qtr-block').forEach(el => {
