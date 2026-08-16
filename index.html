@@ -314,6 +314,33 @@ footer{
   text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;padding:0 20px;
   font-family:'Playfair Display',serif;
 }
+
+/* Discreet teacher-mode controls */
+.teacher-gear{
+  position:fixed;bottom:14px;right:14px;z-index:150;
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+  background:var(--card);opacity:0.35;font-size:1rem;cursor:pointer;
+  transition:opacity 0.15s;
+}
+.teacher-gear:hover{opacity:0.9;}
+.teacher-badge{
+  position:fixed;top:10px;right:10px;z-index:150;
+  background:var(--ink);color:#f4ecd0;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:0.78rem;padding:6px 12px;border-radius:999px;cursor:pointer;
+  box-shadow:var(--shadow);
+}
+.teacher-badge #teacher-badge-off{font-weight:500;opacity:0.75;}
+.password-form{display:flex;flex-direction:column;gap:12px;align-items:center;padding:10px 0 4px;}
+.password-form input{
+  font-family:'Inter',sans-serif;font-size:1rem;padding:9px 12px;border-radius:6px;
+  border:1px solid var(--border);width:100%;max-width:240px;text-align:center;
+}
+.password-form button{
+  border:1px solid var(--accent);background:var(--accent);color:#fff;
+  padding:8px 20px;border-radius:999px;font-weight:700;font-family:'Playfair Display',serif;
+  cursor:pointer;
+}
+.password-form .pw-error{color:var(--red);font-size:0.82rem;min-height:1.1em;}
 </style>
 </head>
 <body>
@@ -395,6 +422,9 @@ footer{
 
 
 <footer>📖 English I · Mr. Lindeman · 2026–2027</footer>
+
+<button id="teacher-gear" class="teacher-gear" title="Settings" aria-label="Settings">⚙️</button>
+<div id="teacher-badge" class="teacher-badge" style="display:none;">👩‍🏫 Teacher Mode <span id="teacher-badge-off">— tap to turn off</span></div>
 
 <div class="overlay" id="overlay">
   <div class="modal" id="modal"></div>
@@ -530,6 +560,7 @@ function rotationUnlockDate(rot){
   return parseISODate(days[0].date);
 }
 function isRotationUnlocked(rot){
+  if(isTeacherMode()) return true;
   const unlock = rotationUnlockDate(rot);
   if(!unlock) return false;
   const today = new Date();
@@ -1302,6 +1333,73 @@ document.querySelectorAll('.quarter-switch button').forEach(btn => {
     });
   });
 });
+
+// --- Teacher mode: a discreet way to preview every rotation regardless of lock date ---
+// This is a static site with no backend — this password is a light convenience gate for
+// checking your own content, not real security. Anyone viewing page source could find it.
+const TEACHER_PASSWORD = "mcacubs2026#";
+function isTeacherMode(){ return localStorage.getItem('teacherMode') === '1'; }
+function setTeacherMode(on){
+  if(on) localStorage.setItem('teacherMode', '1');
+  else localStorage.removeItem('teacherMode');
+  document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
+  renderCalendarMonth();
+  renderList();
+}
+function openTeacherModal(){
+  if(isTeacherMode()){
+    modalEl.className = 'modal';
+    modalEl.innerHTML = `
+      <button class="close" onclick="closeModal()">✕</button>
+      <div class="locked-body">
+        <div class="locked-emoji">👩‍🏫</div>
+        <h4>Teacher Mode is on</h4>
+        <p>Every rotation is unlocked for preview.</p>
+        <div class="password-form">
+          <button id="teacher-off-btn">Turn off</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('teacher-off-btn').addEventListener('click', () => {
+      setTeacherMode(false);
+      closeModal();
+    });
+    overlayEl.classList.add('show');
+    return;
+  }
+  modalEl.className = 'modal';
+  modalEl.innerHTML = `
+    <button class="close" onclick="closeModal()">✕</button>
+    <div class="locked-body">
+      <div class="locked-emoji">⚙️</div>
+      <h4>Teacher Mode</h4>
+      <p>Enter the password to preview every rotation, unlocked.</p>
+      <div class="password-form">
+        <input type="password" id="teacher-pw-input" placeholder="Password" autocomplete="off">
+        <div class="pw-error" id="teacher-pw-error"></div>
+        <button id="teacher-pw-submit">Unlock</button>
+      </div>
+    </div>
+  `;
+  const submit = () => {
+    const input = document.getElementById('teacher-pw-input');
+    if(input.value === TEACHER_PASSWORD){
+      setTeacherMode(true);
+      closeModal();
+    } else {
+      document.getElementById('teacher-pw-error').textContent = 'Incorrect password.';
+      input.value = '';
+      input.focus();
+    }
+  };
+  document.getElementById('teacher-pw-submit').addEventListener('click', submit);
+  document.getElementById('teacher-pw-input').addEventListener('keydown', (e) => { if(e.key === 'Enter') submit(); });
+  overlayEl.classList.add('show');
+  document.getElementById('teacher-pw-input').focus();
+}
+document.getElementById('teacher-gear').addEventListener('click', openTeacherModal);
+document.getElementById('teacher-badge').addEventListener('click', openTeacherModal);
+document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
 
 renderCalendarMonth();
 renderList();
