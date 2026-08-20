@@ -242,7 +242,11 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .modal .close:hover{background:var(--red);border-color:var(--red);color:#fff;}
 
 /* Daily-slide header: big rotation + full date, made for projecting */
-.slide-head{text-align:center;margin-bottom:20px;padding-bottom:18px;border-bottom:3px double var(--gold);}
+.slide-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  margin-bottom:20px;padding-bottom:18px;border-bottom:3px double var(--gold);
+}
+.slide-head-info{text-align:center;flex:1;min-width:260px;}
 .slide-head .slide-rot{
   font-family:'Playfair Display',serif;font-weight:800;font-style:italic;color:var(--accent);
   font-size:2.2rem;letter-spacing:0.3px;
@@ -253,6 +257,49 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 }
 .slide-head .slide-periods{color:var(--muted);font-size:0.9rem;margin-top:2px;}
 .slide-head .cd-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+
+/* Built-in classroom timer */
+.cd-timer{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  background:var(--accent-dim);border:3px solid var(--accent);border-radius:16px;
+  padding:12px 22px;flex-shrink:0;
+}
+.cd-timer.timer-done{border-color:var(--red);background:var(--red-dim);animation:timerFlash 1s steps(1) infinite;}
+@keyframes timerFlash{50%{opacity:0.5;}}
+.cd-timer .timer-display{
+  font-family:'Playfair Display',serif;font-weight:800;font-size:3rem;line-height:1;
+  color:var(--ink);letter-spacing:1px;font-variant-numeric:tabular-nums;
+}
+.cd-timer.timer-done .timer-display{color:var(--red);}
+.cd-timer .timer-controls{display:flex;align-items:center;gap:8px;}
+.cd-timer .timer-controls button{
+  border:none;background:var(--card);color:var(--ink);width:38px;height:38px;
+  border-radius:10px;font-size:1.15rem;cursor:pointer;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+}
+.cd-timer .timer-controls button:hover{background:var(--accent);color:#fff;}
+.cd-timer .timer-presets{display:flex;gap:5px;}
+.cd-timer .timer-presets button{
+  border:none;background:var(--card);color:var(--ink);padding:0 10px;height:32px;
+  border-radius:8px;font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
+  cursor:pointer;box-shadow:var(--shadow);
+}
+.cd-timer .timer-presets button:hover{background:var(--accent);color:#fff;}
+.cd-timer .timer-presets button.active{background:var(--ink);color:#fff;}
+.cd-timer .timer-custom{display:flex;gap:6px;}
+.cd-timer .timer-custom input{
+  width:88px;text-align:center;border:none;border-radius:8px;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;color:var(--ink);
+  padding:0 8px;height:32px;box-shadow:var(--shadow);
+}
+.cd-timer .timer-custom input.input-error{outline:2px solid var(--red);}
+.cd-timer .timer-custom input::placeholder{color:var(--muted);font-weight:600;}
+.cd-timer .timer-custom button{
+  border:none;background:var(--ink);color:#fff;padding:0 14px;height:32px;
+  border-radius:8px;font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
+  cursor:pointer;
+}
+.cd-timer .timer-custom button:hover{background:var(--accent);}
 
 /* Saint of the day + quote of the day */
 .slide-feature{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
@@ -1093,10 +1140,29 @@ function openModal(r, dateOverride){
   modalEl.innerHTML = `
     <button class="close" onclick="closeModal()">✕</button>
     <div class="slide-head">
-      <div class="slide-rot">📖 Rotation ${rot.r}</div>
-      <div class="slide-date">${fmtFullDate(today)}</div>
-      <div class="slide-periods">${fullPeriods ? `Today's Periods: ${fullPeriods.join(', ')}` : rotDateLabel(rot)}</div>
-      <div class="cd-pills">${rotationPillsHTML(rot)}</div>
+      <div class="slide-head-info">
+        <div class="slide-rot">📖 Rotation ${rot.r}</div>
+        <div class="slide-date">${fmtFullDate(today)}</div>
+        <div class="slide-periods">${fullPeriods ? `Today's Periods: ${fullPeriods.join(', ')}` : rotDateLabel(rot)}</div>
+        <div class="cd-pills">${rotationPillsHTML(rot)}</div>
+      </div>
+      <div class="cd-timer" id="cd-timer">
+        <div class="timer-display" id="timer-display">05:00</div>
+        <div class="timer-controls">
+          <button id="timer-toggle" title="Start/pause">▶</button>
+          <button id="timer-reset" title="Reset">↺</button>
+          <div class="timer-presets">
+            <button data-mins="1">1m</button>
+            <button data-mins="5" class="active">5m</button>
+            <button data-mins="10">10m</button>
+            <button data-mins="15">15m</button>
+          </div>
+        </div>
+        <div class="timer-custom">
+          <input type="text" id="timer-custom-input" placeholder="mm:ss or min" inputmode="numeric">
+          <button id="timer-custom-set">Set</button>
+        </div>
+      </div>
     </div>
     ${rotationBodyHTML(rot)}
     <div class="slide-feature">
@@ -1113,8 +1179,133 @@ function openModal(r, dateOverride){
     </div>
   `;
   overlayEl.classList.add('show');
+  initTimer();
 }
-function closeModal(){ overlayEl.classList.remove('show'); }
+function closeModal(){ overlayEl.classList.remove('show'); stopTimer(); }
+
+// --- Built-in classroom timer, shown next to the rotation number when a modal is open ---
+let timerInterval = null;
+let timerDuration = 300;
+let timerRemaining = 300;
+let timerRunning = false;
+function fmtTimer(sec){
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function renderTimerDisplay(){
+  const display = document.getElementById('timer-display');
+  if(display) display.textContent = fmtTimer(Math.max(timerRemaining, 0));
+  const toggle = document.getElementById('timer-toggle');
+  if(toggle) toggle.textContent = timerRunning ? '⏸' : '▶';
+}
+function playTimerBeep(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.35, 0.7].forEach(delay => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = 880;
+      g.gain.setValueAtTime(0.25, ctx.currentTime + delay);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.3);
+      o.start(ctx.currentTime + delay);
+      o.stop(ctx.currentTime + delay + 0.3);
+    });
+  } catch(e){}
+}
+function startTimer(){
+  if(timerRunning || timerRemaining <= 0) return;
+  timerRunning = true;
+  const timerEl = document.getElementById('cd-timer');
+  if(timerEl) timerEl.classList.remove('timer-done');
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    if(timerRemaining <= 0){
+      timerRemaining = 0;
+      stopTimer();
+      const el = document.getElementById('cd-timer');
+      if(el) el.classList.add('timer-done');
+      playTimerBeep();
+    }
+    renderTimerDisplay();
+  }, 1000);
+  renderTimerDisplay();
+}
+function stopTimer(){
+  timerRunning = false;
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  renderTimerDisplay();
+}
+function resetTimer(){
+  stopTimer();
+  timerRemaining = timerDuration;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  renderTimerDisplay();
+}
+function setTimerPreset(mins, btn){
+  stopTimer();
+  timerDuration = mins * 60;
+  timerRemaining = timerDuration;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  document.querySelectorAll('.timer-presets button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderTimerDisplay();
+}
+// Accepts "7", "7.5" (minutes) or "7:30" (mm:ss) and returns whole seconds, or null if invalid.
+function parseCustomTimeToSeconds(str){
+  str = (str || '').trim();
+  if(!str) return null;
+  if(str.includes(':')){
+    const parts = str.split(':');
+    if(parts.length !== 2) return null;
+    const m = Number(parts[0]), s = Number(parts[1]);
+    if(!Number.isFinite(m) || !Number.isFinite(s) || m < 0 || s < 0 || s >= 60) return null;
+    const total = Math.round(m * 60 + s);
+    return total > 0 ? total : null;
+  }
+  const mins = Number(str);
+  if(!Number.isFinite(mins) || mins <= 0) return null;
+  return Math.round(mins * 60);
+}
+function setCustomTimer(){
+  const input = document.getElementById('timer-custom-input');
+  if(!input) return;
+  const secs = parseCustomTimeToSeconds(input.value);
+  if(secs === null){
+    input.classList.add('input-error');
+    return;
+  }
+  input.classList.remove('input-error');
+  stopTimer();
+  timerDuration = secs;
+  timerRemaining = secs;
+  const el = document.getElementById('cd-timer');
+  if(el) el.classList.remove('timer-done');
+  document.querySelectorAll('.timer-presets button').forEach(b => b.classList.remove('active'));
+  renderTimerDisplay();
+}
+function initTimer(){
+  timerDuration = 300;
+  timerRemaining = 300;
+  timerRunning = false;
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  renderTimerDisplay();
+  const toggleBtn = document.getElementById('timer-toggle');
+  if(toggleBtn) toggleBtn.addEventListener('click', () => timerRunning ? stopTimer() : startTimer());
+  const resetBtn = document.getElementById('timer-reset');
+  if(resetBtn) resetBtn.addEventListener('click', resetTimer);
+  document.querySelectorAll('.timer-presets button').forEach(btn => {
+    btn.addEventListener('click', () => setTimerPreset(parseInt(btn.dataset.mins, 10), btn));
+  });
+  const customSetBtn = document.getElementById('timer-custom-set');
+  if(customSetBtn) customSetBtn.addEventListener('click', setCustomTimer);
+  const customInput = document.getElementById('timer-custom-input');
+  if(customInput){
+    customInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') setCustomTimer(); });
+    customInput.addEventListener('input', () => customInput.classList.remove('input-error'));
+  }
+}
 function openSpecialModal(special){
   modalEl.className = 'modal';
   modalEl.innerHTML = `
