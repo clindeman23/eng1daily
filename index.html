@@ -1201,15 +1201,23 @@ function renderTimerDisplay(){
 function playTimerBeep(){
   try{
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    [0, 0.35, 0.7].forEach(delay => {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.connect(g); g.connect(ctx.destination);
-      o.frequency.value = 880;
-      g.gain.setValueAtTime(0.25, ctx.currentTime + delay);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.3);
-      o.start(ctx.currentTime + delay);
-      o.stop(ctx.currentTime + delay + 0.3);
-    });
+    const ding = (startAt) => {
+      // Layered sine partials at slightly inharmonic ratios + a fast decay = bell-like "ding" rather than a flat beep.
+      [1, 2.4, 3.8].forEach((mult, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine';
+        o.connect(g); g.connect(ctx.destination);
+        o.frequency.value = 1000 * mult;
+        const peak = 0.3 / (i + 1);
+        g.gain.setValueAtTime(0, ctx.currentTime + startAt);
+        g.gain.linearRampToValueAtTime(peak, ctx.currentTime + startAt + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startAt + 1.2);
+        o.start(ctx.currentTime + startAt);
+        o.stop(ctx.currentTime + startAt + 1.2);
+      });
+    };
+    ding(0);
+    ding(0.55);
   } catch(e){}
 }
 function startTimer(){
