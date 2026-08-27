@@ -1192,7 +1192,7 @@ function openModal(r, dateOverride){
   overlayEl.classList.add('show');
   initTimer();
 }
-function closeModal(){ overlayEl.classList.remove('show'); stopTimer(); }
+function closeModal(){ overlayEl.classList.remove('show'); }
 
 // --- Built-in classroom timer, shown next to the rotation number when a modal is open ---
 let timerInterval = null;
@@ -1306,11 +1306,14 @@ function setCustomTimer(){
   renderTimerDisplay();
 }
 function initTimer(){
-  timerDuration = 300;
-  timerRemaining = 300;
-  timerRunning = false;
-  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  // Timer state (timerDuration/timerRemaining/timerRunning) persists across modal
+  // open/close and rotation switches — only sync the freshly-rendered DOM to it.
   renderTimerDisplay();
+  const timerEl = document.getElementById('cd-timer');
+  if(timerEl) timerEl.classList.toggle('timer-done', !timerRunning && timerRemaining <= 0);
+  document.querySelectorAll('.timer-presets button').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.mins, 10) * 60 === timerDuration);
+  });
   const toggleBtn = document.getElementById('timer-toggle');
   if(toggleBtn) toggleBtn.addEventListener('click', () => timerRunning ? stopTimer() : startTimer());
   const resetBtn = document.getElementById('timer-reset');
