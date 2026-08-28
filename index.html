@@ -258,6 +258,26 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .slide-head .slide-periods{color:var(--muted);font-size:0.9rem;margin-top:2px;}
 .slide-head .cd-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 
+/* Homework due-date tracker, shown under the date/rotation header */
+.hw-section{
+  margin-bottom:18px;padding:12px 16px;border-radius:10px;
+  border:2px solid var(--gold);background:#faf3df;
+}
+.hw-label{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.76rem;text-transform:uppercase;
+  letter-spacing:0.5px;color:var(--gold);margin-bottom:8px;
+}
+.hw-item{
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:6px 0;
+  border-top:1px solid #e8d69f;font-size:0.9rem;
+}
+.hw-item:first-of-type{border-top:none;}
+.hw-item .hw-name{font-weight:700;color:var(--text);}
+.hw-item .hw-period{color:var(--muted);font-size:0.82rem;}
+.hw-item .hw-status{margin-left:auto;color:var(--text);}
+.hw-item.due-today{background:var(--red-dim);border-radius:6px;padding:6px 8px;margin:2px 0;border-top:none;}
+.hw-item.due-today .hw-status{color:var(--red);font-weight:800;}
+
 /* Built-in classroom timer */
 .cd-timer{
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -645,6 +665,69 @@ function isRotationUnlocked(rot){
 function unlockDateLabel(rot){
   const unlock = rotationUnlockDate(rot);
   return unlock ? fmtDate(unlock) : 'a date the school hasn’t set yet';
+}
+
+// --- Homework due-date tracker, shown under the date/rotation in the daily slide ---
+function startOfDay(d){ const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
+function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+function sameCalendarDate(a, b){ return startOfDay(a).getTime() === startOfDay(b).getTime(); }
+function nextSundayOnOrAfter(d){
+  const x = startOfDay(d);
+  const day = x.getDay();
+  return day === 0 ? x : addDays(x, 7 - day);
+}
+
+// Membean Training is weekly, always due Sunday 11:59 PM for both periods — Week 1
+// due 2026-08-30, counting up one week at a time from there.
+const MEMBEAN_WEEK1_DUE = parseISODate('2026-08-30');
+function membeanHomeworkFor(dateObj){
+  let dueSunday = nextSundayOnOrAfter(dateObj);
+  if(dueSunday < MEMBEAN_WEEK1_DUE) dueSunday = new Date(MEMBEAN_WEEK1_DUE);
+  const week = Math.round((dueSunday - MEMBEAN_WEEK1_DUE) / (7 * 86400000)) + 1;
+  const dueToday = sameCalendarDate(dateObj, dueSunday);
+  return {
+    name: `Membean Training Week ${week}`,
+    period: 'Both Periods',
+    dueToday,
+    statusHTML: dueToday
+      ? `Due Today — 11:59 PM`
+      : `Due Sunday, ${fmtDate(dueSunday)} at 11:59 PM`,
+  };
+}
+
+// One-time assignments, due in class on different days per period.
+const HOMEWORK_ONE_TIME = [
+  { name: 'Literary Terms Quiz', due: {4: '2026-09-01', 7: '2026-09-02'}, inClass: true },
+  { name: 'Writing Process Poster', due: {4: '2026-09-01', 7: '2026-09-02'}, inClass: true },
+];
+function oneTimeHomeworkFor(item, dateObj){
+  const rows = [];
+  Object.entries(item.due).forEach(([period, iso]) => {
+    const dueDate = parseISODate(iso);
+    if(startOfDay(dateObj) > startOfDay(dueDate)) return; // already past — stop showing
+    const dueToday = sameCalendarDate(dateObj, dueDate);
+    rows.push({
+      name: item.name,
+      period: `Period ${period}`,
+      dueToday,
+      statusHTML: dueToday
+        ? `Due Today${item.inClass ? ' — in class' : ''}`
+        : `Due ${WEEKDAY_FULL[dueDate.getDay()]}, ${fmtDate(dueDate)}${item.inClass ? ' (in class)' : ''}`,
+    });
+  });
+  return rows;
+}
+function homeworkHTML(dateObj){
+  const items = [membeanHomeworkFor(dateObj)];
+  HOMEWORK_ONE_TIME.forEach(h => items.push(...oneTimeHomeworkFor(h, dateObj)));
+  if(!items.length) return '';
+  const rows = items.map(it => `
+    <div class="hw-item${it.dueToday ? ' due-today' : ''}">
+      <span class="hw-name">${it.name}</span>
+      <span class="hw-period">${it.period}</span>
+      <span class="hw-status">${it.statusHTML}</span>
+    </div>`).join('');
+  return `<div class="hw-section"><div class="hw-label">📌 Homework</div>${rows}</div>`;
 }
 
 function processRotations(rots){
@@ -1181,6 +1264,7 @@ function openModal(r, dateOverride){
         </div>
       </div>
     </div>
+    ${homeworkHTML(today)}
     ${rotationBodyHTML(rot)}
     <div class="slide-feature">
       <div class="saint-card">
