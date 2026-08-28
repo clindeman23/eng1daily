@@ -495,6 +495,7 @@ const L = {
   litTermsSlides: "https://docs.google.com/presentation/d/14rdq_T8P4yF3SrAAlTLDlA_4XgTJj-JzF8ZsBA-XUZs/edit?usp=sharing",
   litTermsNotes: "https://docs.google.com/document/d/1Q-g_z1T2Q8svzmgYjgu_MkAFRzTLie5Ah5T-rPr4dr4/edit?usp=sharing",
   necklaceText: "https://drive.google.com/file/d/1nIT2pc7uBLCVxaoP-7AhAPjBnwzhWIVb/view?usp=sharing",
+  litTermsQuizPractice: "https://www.gimkit.com/practice/6a91d11e79921e115d0bb548",
 };
 function link(url, text){ return `<a class="reslink" target="_blank" rel="noopener" href="${url}">${text}</a>`; }
 
@@ -546,7 +547,7 @@ const rotationsQ1 = [
   {r:7, summary:"Grammar Notes pt 3 (Adjectives), Membean, Lit Terms Quiz Practice, Read The Necklace",
    grammar:`Grammar Notes pt 3 (Adjectives) — ${link(L.partsOfSpeechSlides,"Slides")} · ${link(L.partsOfSpeechNotes,"Notes")}`,
    membean:"Membean Time.",
-   literature:`Lit Terms quiz practice (link coming soon). Read — ${link(L.necklaceText,'"The Necklace"')}.`,
+   literature:`${link(L.litTermsQuizPractice,"Lit Terms quiz practice")}. Read — ${link(L.necklaceText,'"The Necklace"')}.`,
    tags:[]},
   {r:8, summary:"", tags:[]},
   {r:9, summary:"", tags:[]},
