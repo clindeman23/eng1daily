@@ -760,11 +760,14 @@ const HOMEWORK_ONE_TIME = [
   { name: 'Parts of Speech Quiz', due: {4: '2026-09-08', 7: '2026-09-09'}, inClass: true },
   { name: 'Writing Process Poster', due: {4: '2026-09-01', 7: '2026-09-02'}, inClass: true },
 ];
+const HOMEWORK_LOOKAHEAD_DAYS = 14;
 function oneTimeHomeworkFor(item, dateObj){
   const rows = [];
   Object.entries(item.due).forEach(([period, iso]) => {
     const dueDate = parseISODate(iso);
     if(startOfDay(dateObj) > startOfDay(dueDate)) return; // already past — stop showing
+    const daysAway = (startOfDay(dueDate) - startOfDay(dateObj)) / 86400000;
+    if(daysAway > HOMEWORK_LOOKAHEAD_DAYS) return; // too far out — don't clutter earlier days
     const dueToday = sameCalendarDate(dateObj, dueDate);
     rows.push({
       name: item.name,
