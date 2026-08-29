@@ -183,8 +183,8 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:auto;}
 .cal-day.split-day{background:repeating-linear-gradient(135deg, var(--card), var(--card) 6px, #f1f3f6 6px, #f1f3f6 12px);}
 .cal-day .cd-periods{
-  font-size:0.6rem;color:inherit;opacity:0.8;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;
+  font-size:0.56rem;color:inherit;opacity:0.85;line-height:1.15;
+  white-space:normal;word-break:break-word;overflow:hidden;max-height:2.3em;display:block;
 }
 .picker-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:14px;padding-right:24px;}
 .picker-option{
@@ -786,6 +786,16 @@ function homeworkHTML(dateObj){
     return `<span class="hw-chip${it.dueToday ? ' due-today' : ''}">${it.name}${periodTag}: ${it.statusHTML}</span>`;
   }).join(' <span class="hw-sep">·</span> ');
   return `<div class="hw-mini"><span class="hw-mini-label">📌 HW </span>${chips}</div>`;
+}
+// Trims a rotation summary to a length that always fits the small calendar cell
+// (2 wrapped lines, no gaps left for growth) — cut cleanly at a word boundary,
+// never with a trailing "…", so the cell never has to grow to fit it.
+const CAL_SUMMARY_MAX_CHARS = 34;
+function calendarSummary(text){
+  if(!text || text.length <= CAL_SUMMARY_MAX_CHARS) return text;
+  const cut = text.slice(0, CAL_SUMMARY_MAX_CHARS);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 12 ? cut.slice(0, lastSpace) : cut).trim();
 }
 function dayHasHomeworkDue(dateObj){
   const items = [membeanHomeworkFor(dateObj)];
@@ -1571,7 +1581,7 @@ function renderCalendarMonth(){
       const dataEntries = entries.map(e => `${e.rotation}:${e.periods.join(',')}`).join('|');
       const isoDate = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const hwDueToday = !allLocked && dayHasHomeworkDue(d);
-      const summaryText = allLocked ? '' : (primary.summary || '');
+      const summaryText = allLocked ? '' : calendarSummary(primary.summary || '');
       const tip = allLocked
         ? `🔒 Locked — unlocks ${unlockDateLabel(primary)}`
         : isSplit
