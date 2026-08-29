@@ -258,20 +258,17 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .slide-head .slide-periods{color:var(--muted);font-size:0.9rem;margin-top:2px;}
 .slide-head .cd-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 
-/* Homework due-date tracker — a compact line directly under the date/periods */
+/* Homework due-date tracker — one thin line directly under the date/periods */
 .hw-mini{
-  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px 8px;
-  margin-top:6px;font-size:0.74rem;
+  margin-top:4px;font-size:0.68rem;color:var(--muted);line-height:1.5;
 }
 .hw-mini-label{
   font-family:'Playfair Display',serif;font-weight:700;text-transform:uppercase;
   letter-spacing:0.4px;color:var(--gold);
 }
-.hw-chip{
-  background:#faf3df;border:1px solid #e8d69f;color:var(--text);
-  padding:2px 8px;border-radius:20px;white-space:nowrap;
-}
-.hw-chip.due-today{background:var(--red-dim);border-color:var(--red);color:var(--red);font-weight:700;}
+.hw-chip{white-space:nowrap;}
+.hw-chip.due-today{color:var(--red);font-weight:700;}
+.hw-sep{color:var(--border);margin:0 5px;}
 
 /* Built-in classroom timer */
 .cd-timer{
@@ -725,9 +722,9 @@ function homeworkHTML(dateObj){
   if(!items.length) return '';
   const chips = items.map(it => {
     const periodTag = it.period === 'Both Periods' ? '' : ` (${it.period.replace('Period ', 'P')})`;
-    return `<span class="hw-chip${it.dueToday ? ' due-today' : ''}">${it.name}${periodTag} — ${it.statusHTML}</span>`;
-  }).join('');
-  return `<div class="hw-mini"><span class="hw-mini-label">📌 HW:</span>${chips}</div>`;
+    return `<span class="hw-chip${it.dueToday ? ' due-today' : ''}">${it.name}${periodTag}: ${it.statusHTML}</span>`;
+  }).join(' <span class="hw-sep">·</span> ');
+  return `<div class="hw-mini"><span class="hw-mini-label">📌 HW </span>${chips}</div>`;
 }
 
 function processRotations(rots){
