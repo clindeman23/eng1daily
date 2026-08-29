@@ -185,6 +185,7 @@ p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:au
 .cal-day .cd-periods{
   font-size:0.56rem;color:inherit;opacity:0.85;line-height:1.15;
   white-space:normal;word-break:break-word;overflow:hidden;max-height:2.3em;display:block;
+  flex-shrink:0;
 }
 .picker-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:14px;padding-right:24px;}
 .picker-option{
@@ -790,15 +791,18 @@ function homeworkHTML(dateObj){
   }).join(' <span class="hw-sep">·</span> ');
   return `<div class="hw-mini"><span class="hw-mini-label">📌 HW </span>${chips}</div>`;
 }
-// Trims a rotation summary to a length that always fits the small calendar cell
-// (2 wrapped lines, no gaps left for growth) — cut cleanly at a word boundary,
-// never with a trailing "…", so the cell never has to grow to fit it.
-const CAL_SUMMARY_MAX_CHARS = 34;
-function calendarSummary(text){
-  if(!text || text.length <= CAL_SUMMARY_MAX_CHARS) return text;
-  const cut = text.slice(0, CAL_SUMMARY_MAX_CHARS);
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > 12 ? cut.slice(0, lastSpace) : cut).trim();
+// The full rotation summary is a comma-joined sentence that always starts with
+// Grammar, so truncating it to fit the tiny calendar cell only ever showed
+// Grammar. Show which subject areas are covered instead — short, and it
+// represents everything happening that day, not just whatever's mentioned first.
+function calendarSummary(rot){
+  const tags = [];
+  if(rot.grammar) tags.push('Gram');
+  if(rot.membean) tags.push('Memb');
+  if(rot.writing) tags.push('Writ');
+  if(rot.literature) tags.push('Lit');
+  if(!tags.length && rot.activities && rot.activities.length) tags.push('Activities');
+  return tags.join('·');
 }
 function dayHasHomeworkDue(dateObj){
   const items = [membeanHomeworkFor(dateObj)];
@@ -1584,7 +1588,7 @@ function renderCalendarMonth(){
       const dataEntries = entries.map(e => `${e.rotation}:${e.periods.join(',')}`).join('|');
       const isoDate = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const hwDueToday = !allLocked && dayHasHomeworkDue(d);
-      const summaryText = allLocked ? '' : calendarSummary(primary.summary || '');
+      const summaryText = allLocked ? '' : calendarSummary(primary);
       const tip = allLocked
         ? `🔒 Locked — unlocks ${unlockDateLabel(primary)}`
         : isSplit
