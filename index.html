@@ -120,6 +120,14 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 .qltile .qllabel{font-weight:700;font-size:0.9rem;line-height:1.25;}
 .qltile .qlarrow{margin-left:auto;color:var(--muted);font-size:1.1rem;flex-shrink:0;}
 .qltile.c-grades{border-left-color:var(--accent);}
+.qltile.c-grammar{border-left-color:#782F40;}
+.qltile.c-grammar:hover{border-left-color:#782F40;background:#f4e6e9;}
+.qltile.c-writing{border-left-color:#00838f;}
+.qltile.c-writing:hover{border-left-color:#00838f;background:#e0f5f3;}
+.qltile.c-literature{border-left-color:#a8842e;}
+.qltile.c-literature:hover{border-left-color:#a8842e;background:#f7f0dc;}
+.qltile.c-membean{border-left-color:#2e7d32;}
+.qltile.c-membean:hover{border-left-color:#2e7d32;background:#e6f4e8;}
 
 /* Real calendar grid */
 .cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 22px;font-size:0.82rem;font-weight:600;color:var(--muted);}
@@ -168,9 +176,9 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 .cal-day.locked-day{background:#eceff5 !important;border-color:#d8ddea !important;color:#9aa2ba !important;filter:blur(0.3px);}
 .cal-day.locked-day .cd-rnum{filter:blur(1.5px);opacity:0.7;}
 /* Rotation color cycle — color identifies WHICH rotation, not what kind of day */
-.cal-day.rc0{background:#f3e0df;border-color:#d9a8a5;color:#7a2e2e;}
-.cal-day.rc1{background:#f7edd2;border-color:#dfc47a;color:#8a6110;}
-.cal-day.rc2{background:#e1e6f2;border-color:#a9b8d9;color:#2c4270;}
+.cal-day.rc0{background:#f4e6e9;border-color:#c99aa5;color:#782F40;}
+.cal-day.rc1{background:#f7f0dc;border-color:#d9c286;color:#a8842e;}
+.cal-day.rc2{background:#e0f5f3;border-color:#94d3cd;color:#00838f;}
 
 p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:auto;}
 .cal-day.split-day{background:repeating-linear-gradient(135deg, var(--card), var(--card) 6px, #f1f3f6 6px, #f1f3f6 12px);}
@@ -429,7 +437,7 @@ footer{
 
 <nav class="tabs">
   <button class="active" data-page="calendar">📅 Calendar</button>
-  <button data-page="gradesheets">📊 Grade Sheets</button>
+  <button data-page="links">🔗 Quick Links</button>
 </nav>
 
 <div class="wrap">
@@ -466,23 +474,66 @@ footer{
     </div>
   </div>
 
-  <!-- GRADE SHEETS -->
-  <div class="page" id="page-gradesheets">
-    <div class="qlgroup">
-      <h3>Quarter 1</h3>
-      <div class="qlgrid">
-        <a class="qltile c-grades" target="_blank" rel="noopener" href="https://docs.google.com/document/d/16G_RaeD9ey-c8nAPUXiAbGQgiQzeGyYpNJfnQ_t1zGs/edit?usp=sharing"><span class="qlicon">📊</span><span class="qllabel">Quarter 1 Gradesheet</span><span class="qlarrow">↗</span></a>
-      </div>
+  <!-- QUICK LINKS -->
+  <div class="page" id="page-links">
+    <div class="section-title-row">
+      <h2 class="section-title">Quick Links</h2>
     </div>
 
     <div class="qlgroup">
-      <h3>Quarter 2</h3>
+      <h3>Grade Sheets</h3>
       <div class="qlgrid">
+        <a class="qltile c-grades" target="_blank" rel="noopener" href="https://docs.google.com/document/d/16G_RaeD9ey-c8nAPUXiAbGQgiQzeGyYpNJfnQ_t1zGs/edit?usp=sharing"><span class="qlicon">📊</span><span class="qllabel">Quarter 1 Gradesheet</span><span class="qlarrow">↗</span></a>
         <a class="qltile c-grades" target="_blank" rel="noopener" href="#"><span class="qlicon">📊</span><span class="qllabel">Quarter 2 Gradesheet — add your link</span><span class="qlarrow">↗</span></a>
       </div>
     </div>
 
-    <p class="section-sub">Replace the placeholder <code>href="#"</code> links above with your real Google Sheet links once you have them.</p>
+    <div class="qlgroup">
+      <h3>Grammar</h3>
+      <div class="qlgrid">
+        <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1lNBOgl7UPDHycypdbC9YtRmLN8Ni-oK-IuZzYZkVeng/edit?usp=sharing"><span class="qlicon">📚</span><span class="qllabel">Parts of Speech Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1gxJ8kAKyVrNlbtLGp4m7NS181U3MSkU_due-M4IEebI/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Parts of Speech Notes</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Literature</h3>
+      <div class="qlgrid">
+        <a class="qltile c-literature" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/14rdq_T8P4yF3SrAAlTLDlA_4XgTJj-JzF8ZsBA-XUZs/edit?usp=sharing"><span class="qlicon">📚</span><span class="qllabel">Lit Terms Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-literature" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1Q-g_z1T2Q8svzmgYjgu_MkAFRzTLie5Ah5T-rPr4dr4/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Lit Terms Notes</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-literature" target="_blank" rel="noopener" href="https://www.gimkit.com/practice/6a91d11e79921e115d0bb548"><span class="qlicon">🎮</span><span class="qllabel">Lit Terms Quiz Practice</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-literature" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1nIT2pc7uBLCVxaoP-7AhAPjBnwzhWIVb/view?usp=sharing"><span class="qlicon">📕</span><span class="qllabel">"The Necklace" Text</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Writing</h3>
+      <div class="qlgrid">
+        <a class="qltile c-writing" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/10mqtlFCQVBU4UrihBoGUUbiUMjl9FWQvPtcov5To6hg/edit?usp=sharing"><span class="qlicon">📚</span><span class="qllabel">Writing Process Slides</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-writing" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1959DDin9xLyTyUgfAiF9QQ8KJpDI1NTxt8qVcUhBi50/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Writing Process Notes</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-writing" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1s50COdhwkylELIwHJSMWoQkeWcLFpGeWmdZJ0OfVSdw/edit?usp=sharing"><span class="qlicon">🖼️</span><span class="qllabel">Writing Process Poster</span><span class="qlarrow">↗</span></a>
+        <a class="qltile c-writing" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1oafItlIHnbgksp-cWYXbkPzKcU4-8BuW32dX6gg7xWY/edit?usp=sharing"><span class="qlicon">📝</span><span class="qllabel">Writing Process Poster Assignment</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Membean</h3>
+      <div class="qlgrid">
+        <a class="qltile c-membean" target="_blank" rel="noopener" href="https://vimeo.com/405243332/66aca78165"><span class="qlicon">🌱</span><span class="qllabel">Membean Intro Video</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="qlgroup">
+      <h3>Getting Started</h3>
+      <div class="qlgrid">
+        <a class="qltile" target="_blank" rel="noopener" href="https://canva.link/dnwcvrura12iade"><span class="qlicon">📄</span><span class="qllabel">Syllabus</span><span class="qlarrow">↗</span></a>
+        <a class="qltile" target="_blank" rel="noopener" href="https://canva.link/h52opnhneiz5yq2"><span class="qlicon">📋</span><span class="qllabel">Classroom Procedures</span><span class="qlarrow">↗</span></a>
+        <a class="qltile" target="_blank" rel="noopener" href="https://docs.google.com/document/d/18faVWPLwLU6_c56V4GqR4Ybk259_18BbJkVtOj-hKj8/edit?usp=sharing"><span class="qlicon">📖</span><span class="qllabel">Summer Reading Organizer</span><span class="qlarrow">↗</span></a>
+        <a class="qltile" target="_blank" rel="noopener" href="https://docs.google.com/document/d/10dbd6jtTwaJRRM5RXuOCHjPOuWXZ6Vuh6G3QBuwa_fE/edit?usp=sharing"><span class="qlicon">✍️</span><span class="qllabel">Summer Reading Essay</span><span class="qlarrow">↗</span></a>
+      </div>
+    </div>
+
+    <p class="section-sub">Replace any placeholder <code>href="#"</code> links above with the real link once you have it.</p>
   </div>
 
 
