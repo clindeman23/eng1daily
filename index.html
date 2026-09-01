@@ -1798,6 +1798,19 @@ document.getElementById('teacher-gear').addEventListener('click', openTeacherMod
 document.getElementById('teacher-badge').addEventListener('click', openTeacherModal);
 document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex' : 'none';
 
+// Default the calendar to whichever month it currently is, not always the first month.
+(function(){
+  const months = activeMonths();
+  const today = new Date();
+  const idx = months.findIndex(mo => mo.year === today.getFullYear() && mo.month === today.getMonth());
+  if(idx !== -1){
+    currentMonthPos = idx;
+  } else {
+    const first = months[0], last = months[months.length - 1];
+    const beforeFirst = today.getFullYear() < first.year || (today.getFullYear() === first.year && today.getMonth() < first.month);
+    currentMonthPos = beforeFirst ? 0 : months.length - 1;
+  }
+})();
 renderCalendarMonth();
 renderList();
 </script>
