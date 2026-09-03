@@ -569,6 +569,7 @@ const L = {
   litTermsNotes: "https://docs.google.com/document/d/1Q-g_z1T2Q8svzmgYjgu_MkAFRzTLie5Ah5T-rPr4dr4/edit?usp=sharing",
   necklaceText: "https://drive.google.com/file/d/1nIT2pc7uBLCVxaoP-7AhAPjBnwzhWIVb/view?usp=sharing",
   litTermsQuizPractice: "https://www.gimkit.com/practice/6a91d11e79921e115d0bb548",
+  specialPersonParagraph: "https://docs.google.com/document/d/1t4z6E11NF1P0gh68H0_fR9fPoMx8mlvzY6g6ySXJ3mA/edit?usp=drive_link",
 };
 function link(url, text){ return `<a class="reslink" target="_blank" rel="noopener" href="${url}">${text}</a>`; }
 
@@ -627,10 +628,10 @@ const rotationsQ1 = [
    membean:"Membean Time — 15 minutes.",
    literature:`Literary Terms Quiz. Continue reading — ${link(L.necklaceText,'"The Necklace"')}.`,
    tags:[]},
-  {r:9, summary:"Parts of Speech Quiz Review, Membean, Narrative Introduction, Continue The Necklace",
+  {r:9, summary:"Parts of Speech Quiz Review, Membean, Special Person Paragraph, Continue The Necklace",
    grammar:"Parts of Speech Quiz Review.",
    membean:"Membean Time — 15 minutes.",
-   writing:"Parts of Speech Narrative introduction.",
+   writing:`${link(L.specialPersonParagraph,"Special Person Paragraph")}`,
    literature:`Continue reading — ${link(L.necklaceText,'"The Necklace"')}.`,
    tags:[]},
   {r:10, summary:"", tags:[]},
