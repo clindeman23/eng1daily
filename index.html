@@ -427,7 +427,7 @@ footer{
   <div class="header-inner">
     <div class="winctl"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
     <h1>📖 English I — Student Guide</h1>
-    <p class="sub"><span id="qtr-label">Quarter 1</span> · 2026–2027<span class="cursor"> 🖋️</span></p>
+    <p class="sub"><span id="qtr-label">Full Year</span> · 2026–2027<span class="cursor"> 🖋️</span></p>
   </div>
 </header>
 
@@ -723,15 +723,16 @@ const rotationsQ1 = [
    membean:"15 minutes of Membean training.",
    literature:"Short Stories Test.",
    tags:[]},
-];
-
-const rotationsQ2 = [
-  {r:1, summary:"Capitalization pt 4, Membean, Parts of Speech Creative Writing, Romeo and Juliet Intro",
+  {r:21, summary:"Capitalization pt 4, Membean, Parts of Speech Creative Writing, Romeo and Juliet Intro",
    grammar:`Capitalization pt 4 — ${link(L.capitalizationSlides,"Slides")} · ${link(L.capitalizationNotes,"Notes")}`,
    membean:"15 minutes of Membean training.",
    writing:`Introduce — ${link(L.posCreativeWriting,"Parts of Speech Creative Writing Assignment")}`,
    literature:"Start Romeo and Juliet intro activities.",
    tags:[]},
+];
+
+const rotationsQ2 = [
+  {r:1, summary:"", tags:[]},
   {r:2, summary:"", tags:[]},
   {r:3, summary:"", tags:[]},
   {r:4, summary:"", tags:[]},
@@ -750,7 +751,6 @@ const rotationsQ2 = [
   {r:17, summary:"", tags:[]},
   {r:18, summary:"", tags:[]},
   {r:19, summary:"", tags:[]},
-  {r:20, summary:"", tags:[]},
 ];
 
 // --- Real per-rotation school days, from MCA's published class-rotation calendar ---
@@ -760,8 +760,8 @@ const rotationsQ2 = [
 // the calendar prompts which rotation to view when a day belongs to two.
 // Q1 is fully covered by the published calendar; Q2 is only published through Nov 9, 2026 so
 // far, so later rotations are partially or fully TBD until MCA publishes further out.
-const ROTATION_DAYS_Q1 = {"1":[{"date":"2026-08-13","periods":[1,2,3]},{"date":"2026-08-14","periods":[4,5,6,7]}],"2":[{"date":"2026-08-17","periods":[1,2,3,4]},{"date":"2026-08-18","periods":[5,6,7]}],"3":[{"date":"2026-08-18","periods":[1]},{"date":"2026-08-19","periods":[2,3,4,5]},{"date":"2026-08-20","periods":[6,7]}],"4":[{"date":"2026-08-20","periods":[1,2]},{"date":"2026-08-21","periods":[3,4,5,6]},{"date":"2026-08-24","periods":[7]}],"5":[{"date":"2026-08-24","periods":[1,2,3]},{"date":"2026-08-25","periods":[4,5,6,7]}],"6":[{"date":"2026-08-26","periods":[1,2,3,4]},{"date":"2026-08-27","periods":[5,6,7]}],"7":[{"date":"2026-08-27","periods":[1]},{"date":"2026-08-28","periods":[2,3,4,5]},{"date":"2026-08-31","periods":[6,7]}],"8":[{"date":"2026-08-31","periods":[1,2]},{"date":"2026-09-01","periods":[3,4,5,6]},{"date":"2026-09-02","periods":[7]}],"9":[{"date":"2026-09-02","periods":[1,2,3]},{"date":"2026-09-03","periods":[4,5,6,7]}],"10":[{"date":"2026-09-04","periods":[1,2]},{"date":"2026-09-08","periods":[3,4,5,6]},{"date":"2026-09-09","periods":[7]}],"11":[{"date":"2026-09-09","periods":[1,2,3]},{"date":"2026-09-10","periods":[4,5,6,7]}],"12":[{"date":"2026-09-11","periods":[1,2,3]},{"date":"2026-09-14","periods":[4,5,6,7]}],"13":[{"date":"2026-09-15","periods":[1,2,3,4]},{"date":"2026-09-16","periods":[5,6,7]}],"14":[{"date":"2026-09-16","periods":[1]},{"date":"2026-09-17","periods":[2,3,4,5]},{"date":"2026-09-18","periods":[6,7]}],"15":[{"date":"2026-09-18","periods":[1,2]},{"date":"2026-09-21","periods":[3,4,5,6]},{"date":"2026-09-22","periods":[7]}],"16":[{"date":"2026-09-22","periods":[1,2,3]},{"date":"2026-09-23","periods":[4,5,6,7]}],"17":[{"date":"2026-09-24","periods":[1,2,3,4]},{"date":"2026-09-25","periods":[5,6,7]}],"18":[{"date":"2026-09-25","periods":[1]},{"date":"2026-09-28","periods":[2,3,4,5]},{"date":"2026-09-29","periods":[6,7]}],"19":[{"date":"2026-09-29","periods":[1,2]},{"date":"2026-09-30","periods":[3,4,5,6]},{"date":"2026-10-01","periods":[7]}],"20":[{"date":"2026-10-01","periods":[1,2,3]},{"date":"2026-10-02","periods":[4,5,6,7]}]};
-const ROTATION_DAYS_Q2 = {"1":[{"date":"2026-10-05","periods":[1,2,3,4]},{"date":"2026-10-06","periods":[5,6,7]}],"2":[{"date":"2026-10-06","periods":[1]},{"date":"2026-10-08","periods":[2,3,4]},{"date":"2026-10-13","periods":[5,6,7]}],"3":[{"date":"2026-10-13","periods":[1]},{"date":"2026-10-14","periods":[2,3,4]},{"date":"2026-10-15","periods":[5,6,7]}],"4":[{"date":"2026-10-15","periods":[1]},{"date":"2026-10-16","periods":[2,3,4,5]},{"date":"2026-10-19","periods":[6,7]}],"5":[{"date":"2026-10-19","periods":[1,2]},{"date":"2026-10-20","periods":[3,4,5,6]},{"date":"2026-10-21","periods":[7]}],"6":[{"date":"2026-10-21","periods":[1,2,3]},{"date":"2026-10-22","periods":[4,5,6,7]}],"7":[{"date":"2026-10-23","periods":[1,2,3]},{"date":"2026-10-26","periods":[4,5,6,7]}],"8":[{"date":"2026-10-27","periods":[1,2,3,4]},{"date":"2026-10-28","periods":[5,6,7]}],"9":[{"date":"2026-10-28","periods":[1]},{"date":"2026-10-29","periods":[2,3,4,5]},{"date":"2026-10-30","periods":[6,7]}],"10":[{"date":"2026-10-30","periods":[1,2]},{"date":"2026-11-02","periods":[3,4,5,6]},{"date":"2026-11-03","periods":[7]}],"11":[{"date":"2026-11-03","periods":[1,2,3]},{"date":"2026-11-04","periods":[4,5,6,7]}],"12":[{"date":"2026-11-05","periods":[1,2,3,4]},{"date":"2026-11-06","periods":[5,6,7]}],"13":[{"date":"2026-11-06","periods":[1]},{"date":"2026-11-09","periods":[2,3,4,5]},{"date":"2026-11-10","periods":[6,7]}],"14":[{"date":"2026-11-10","periods":[1,2]},{"date":"2026-11-11","periods":[3,4,5,6]},{"date":"2026-11-12","periods":[7]}],"15":[{"date":"2026-11-12","periods":[1,2,3]},{"date":"2026-11-13","periods":[4,5,6]},{"date":"2026-11-16","periods":[7]}],"16":[{"date":"2026-11-16","periods":[1,2,3]},{"date":"2026-11-17","periods":[4,5,6,7]}],"17":[{"date":"2026-11-18","periods":[1,2,3,4]},{"date":"2026-11-19","periods":[5,6,7]}],"18":[{"date":"2026-11-19","periods":[1]},{"date":"2026-11-20","periods":[2,3]},{"date":"2026-11-30","periods":[4,5,6,7]}],"19":[{"date":"2026-12-01","periods":[1,2,3,4]},{"date":"2026-12-02","periods":[5,6,7]}],"20":[{"date":"2026-12-02","periods":[1]},{"date":"2026-12-03","periods":[2,3,4,5]},{"date":"2026-12-04","periods":[6,7]}]};
+const ROTATION_DAYS_Q1 = {"1":[{"date":"2026-08-13","periods":[1,2,3]},{"date":"2026-08-14","periods":[4,5,6,7]}],"2":[{"date":"2026-08-17","periods":[1,2,3,4]},{"date":"2026-08-18","periods":[5,6,7]}],"3":[{"date":"2026-08-18","periods":[1]},{"date":"2026-08-19","periods":[2,3,4,5]},{"date":"2026-08-20","periods":[6,7]}],"4":[{"date":"2026-08-20","periods":[1,2]},{"date":"2026-08-21","periods":[3,4,5,6]},{"date":"2026-08-24","periods":[7]}],"5":[{"date":"2026-08-24","periods":[1,2,3]},{"date":"2026-08-25","periods":[4,5,6,7]}],"6":[{"date":"2026-08-26","periods":[1,2,3,4]},{"date":"2026-08-27","periods":[5,6,7]}],"7":[{"date":"2026-08-27","periods":[1]},{"date":"2026-08-28","periods":[2,3,4,5]},{"date":"2026-08-31","periods":[6,7]}],"8":[{"date":"2026-08-31","periods":[1,2]},{"date":"2026-09-01","periods":[3,4,5,6]},{"date":"2026-09-02","periods":[7]}],"9":[{"date":"2026-09-02","periods":[1,2,3]},{"date":"2026-09-03","periods":[4,5,6,7]}],"10":[{"date":"2026-09-04","periods":[1,2]},{"date":"2026-09-08","periods":[3,4,5,6]},{"date":"2026-09-09","periods":[7]}],"11":[{"date":"2026-09-09","periods":[1,2,3]},{"date":"2026-09-10","periods":[4,5,6,7]}],"12":[{"date":"2026-09-11","periods":[1,2,3]},{"date":"2026-09-14","periods":[4,5,6,7]}],"13":[{"date":"2026-09-15","periods":[1,2,3,4]},{"date":"2026-09-16","periods":[5,6,7]}],"14":[{"date":"2026-09-16","periods":[1]},{"date":"2026-09-17","periods":[2,3,4,5]},{"date":"2026-09-18","periods":[6,7]}],"15":[{"date":"2026-09-18","periods":[1,2]},{"date":"2026-09-21","periods":[3,4,5,6]},{"date":"2026-09-22","periods":[7]}],"16":[{"date":"2026-09-22","periods":[1,2,3]},{"date":"2026-09-23","periods":[4,5,6,7]}],"17":[{"date":"2026-09-24","periods":[1,2,3,4]},{"date":"2026-09-25","periods":[5,6,7]}],"18":[{"date":"2026-09-25","periods":[1]},{"date":"2026-09-28","periods":[2,3,4,5]},{"date":"2026-09-29","periods":[6,7]}],"19":[{"date":"2026-09-29","periods":[1,2]},{"date":"2026-09-30","periods":[3,4,5,6]},{"date":"2026-10-01","periods":[7]}],"20":[{"date":"2026-10-01","periods":[1,2,3]},{"date":"2026-10-02","periods":[4,5,6,7]}],"21":[{"date":"2026-10-05","periods":[1,2,3,4]},{"date":"2026-10-06","periods":[5,6,7]}]};
+const ROTATION_DAYS_Q2 = {"1":[{"date":"2026-10-06","periods":[1]},{"date":"2026-10-08","periods":[2,3,4]},{"date":"2026-10-13","periods":[5,6,7]}],"2":[{"date":"2026-10-13","periods":[1]},{"date":"2026-10-14","periods":[2,3,4]},{"date":"2026-10-15","periods":[5,6,7]}],"3":[{"date":"2026-10-15","periods":[1]},{"date":"2026-10-16","periods":[2,3,4,5]},{"date":"2026-10-19","periods":[6,7]}],"4":[{"date":"2026-10-19","periods":[1,2]},{"date":"2026-10-20","periods":[3,4,5,6]},{"date":"2026-10-21","periods":[7]}],"5":[{"date":"2026-10-21","periods":[1,2,3]},{"date":"2026-10-22","periods":[4,5,6,7]}],"6":[{"date":"2026-10-23","periods":[1,2,3]},{"date":"2026-10-26","periods":[4,5,6,7]}],"7":[{"date":"2026-10-27","periods":[1,2,3,4]},{"date":"2026-10-28","periods":[5,6,7]}],"8":[{"date":"2026-10-28","periods":[1]},{"date":"2026-10-29","periods":[2,3,4,5]},{"date":"2026-10-30","periods":[6,7]}],"9":[{"date":"2026-10-30","periods":[1,2]},{"date":"2026-11-02","periods":[3,4,5,6]},{"date":"2026-11-03","periods":[7]}],"10":[{"date":"2026-11-03","periods":[1,2,3]},{"date":"2026-11-04","periods":[4,5,6,7]}],"11":[{"date":"2026-11-05","periods":[1,2,3,4]},{"date":"2026-11-06","periods":[5,6,7]}],"12":[{"date":"2026-11-06","periods":[1]},{"date":"2026-11-09","periods":[2,3,4,5]},{"date":"2026-11-10","periods":[6,7]}],"13":[{"date":"2026-11-10","periods":[1,2]},{"date":"2026-11-11","periods":[3,4,5,6]},{"date":"2026-11-12","periods":[7]}],"14":[{"date":"2026-11-12","periods":[1,2,3]},{"date":"2026-11-13","periods":[4,5,6]},{"date":"2026-11-16","periods":[7]}],"15":[{"date":"2026-11-16","periods":[1,2,3]},{"date":"2026-11-17","periods":[4,5,6,7]}],"16":[{"date":"2026-11-18","periods":[1,2,3,4]},{"date":"2026-11-19","periods":[5,6,7]}],"17":[{"date":"2026-11-19","periods":[1]},{"date":"2026-11-20","periods":[2,3]},{"date":"2026-11-30","periods":[4,5,6,7]}],"18":[{"date":"2026-12-01","periods":[1,2,3,4]},{"date":"2026-12-02","periods":[5,6,7]}],"19":[{"date":"2026-12-02","periods":[1]},{"date":"2026-12-03","periods":[2,3,4,5]},{"date":"2026-12-04","periods":[6,7]}]};
 
 function dateKey(d){ return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; }
 
@@ -783,7 +783,7 @@ function rotationDaysFor(quarter){ return quarter === 1 ? ROTATION_DAYS_Q1 : ROT
 // English only meets Periods 4 and 7 — filter the master MCA schedule down to just those.
 const ENGLISH_PERIODS = [4, 7];
 function rotDaysForRotation(rot){
-  const days = rotationDaysFor(activeQuarter)[String(rot.r)] || [];
+  const days = rotationDaysFor(rot.q)[String(rot.r)] || [];
   return days
     .map(d => ({date: d.date, periods: d.periods.filter(p => ENGLISH_PERIODS.includes(p))}))
     .filter(d => d.periods.length);
@@ -907,17 +907,18 @@ function processRotations(rots){
     rot.status = rot.tags.includes('graded') ? 'graded' : rot.tags.includes('goal') ? 'goal' : rot.tags.includes('checkin') ? 'checkin' : 'plain';
   });
 }
-function buildDayRotationMap(quarter){
-  const map = {}; // dateKey -> [{rotation, periods}, ...] (usually 1 entry, sometimes 2 on a shared day)
-  const rotationDays = rotationDaysFor(quarter);
-  Object.entries(rotationDays).forEach(([rotStr, days]) => {
-    const rotation = parseInt(rotStr, 10);
-    days.forEach(({date, periods}) => {
-      const relevant = periods.filter(p => ENGLISH_PERIODS.includes(p));
-      if(!relevant.length) return;
-      const key = dateKey(parseISODate(date));
-      if(!map[key]) map[key] = [];
-      map[key].push({rotation, periods: relevant});
+function buildDayRotationMap(){
+  const map = {}; // dateKey -> [{quarter, rotation, periods}, ...] (usually 1 entry, sometimes 2 on a shared day)
+  [1, 2].forEach(quarter => {
+    Object.entries(rotationDaysFor(quarter)).forEach(([rotStr, days]) => {
+      const rotation = parseInt(rotStr, 10);
+      days.forEach(({date, periods}) => {
+        const relevant = periods.filter(p => ENGLISH_PERIODS.includes(p));
+        if(!relevant.length) return;
+        const key = dateKey(parseISODate(date));
+        if(!map[key]) map[key] = [];
+        map[key].push({quarter, rotation, periods: relevant});
+      });
     });
   });
   return map;
@@ -925,13 +926,21 @@ function buildDayRotationMap(quarter){
 
 processRotations(rotationsQ1);
 processRotations(rotationsQ2);
+// Every rotation knows its quarter (q) and its position in the whole year (g) so the
+// calendar can show Quarter 1 and Quarter 2 as one continuous run.
+rotationsQ1.forEach(rot => { rot.q = 1; rot.g = rot.r; });
+rotationsQ2.forEach(rot => { rot.q = 2; rot.g = rotationsQ1.length + rot.r; });
+function allRotations(){ return [...rotationsQ1, ...rotationsQ2]; }
+function findRotation(q, r){ return (q === 1 ? rotationsQ1 : rotationsQ2).find(x => x.r === r); }
+function rotName(rot){ return rot.q === 1 ? `Rotation ${rot.r}` : `Q2 · Rotation ${rot.r}`; }
+function rotShort(rot){ return rot.q === 1 ? `R${rot.r}` : `Q2 R${rot.r}`; }
 
-// --- Quarter + month-page state ---
+// --- Month-page state (the calendar shows the whole year; the quarter switch only
+//     picks which Quick Links page is showing) ---
 let activeQuarter = 1;
 let currentMonthPos = 0;
 let currentFilter = 'all';
-function activeRotations(){ return activeQuarter === 1 ? rotationsQ1 : rotationsQ2; }
-function activeDayMap(){ return buildDayRotationMap(activeQuarter); }
+function activeDayMap(){ return buildDayRotationMap(); }
 function activeMonths(){
   const keys = Object.keys(activeDayMap());
   if(!keys.length) return [{year: 2026, month: 7}];
@@ -948,7 +957,7 @@ function activeMonths(){
 }
 
 const ROTATION_COLOR_COUNT = 3;
-function rotationColorClass(rot){ return 'rc' + ((rot.r - 1) % ROTATION_COLOR_COUNT); }
+function rotationColorClass(rot){ return 'rc' + ((rot.g - 1) % ROTATION_COLOR_COUNT); }
 function rotationBadge(rot){
   if(rot.tags.includes('graded')) return '🏆';
   if(rot.goal) return '🎯';
@@ -1375,12 +1384,13 @@ function rotationBodyHTML(rot){
 
 // The full school day's period rotation (all periods meeting that day, not just 4 & 7) —
 // looked up straight from the unfiltered MCA master schedule for a specific calendar date.
-function fullPeriodsForDate(date, quarter){
+function fullPeriodsForDate(date){
   const key = dateKey(date);
-  const rotationDays = rotationDaysFor(quarter);
-  for(const days of Object.values(rotationDays)){
-    for(const d of days){
-      if(dateKey(parseISODate(d.date)) === key) return d.periods;
+  for(const quarter of [1, 2]){
+    for(const days of Object.values(rotationDaysFor(quarter))){
+      for(const d of days){
+        if(dateKey(parseISODate(d.date)) === key) return d.periods;
+      }
     }
   }
   return null;
@@ -1388,8 +1398,8 @@ function fullPeriodsForDate(date, quarter){
 
 const overlayEl = document.getElementById('overlay');
 const modalEl = document.getElementById('modal');
-function openModal(r, dateOverride){
-  const rot = activeRotations().find(x => x.r === r);
+function openModal(q, r, dateOverride){
+  const rot = findRotation(q, r);
   if(!rot) return;
   if(!isRotationUnlocked(rot)){
     modalEl.className = 'modal locked';
@@ -1397,7 +1407,7 @@ function openModal(r, dateOverride){
       <button class="close" onclick="closeModal()">✕</button>
       <div class="locked-body">
         <div class="locked-emoji">🔒</div>
-        <h4>Rotation ${rot.r} isn't unlocked yet</h4>
+        <h4>${rotName(rot)} isn't unlocked yet</h4>
         <p>This one shows up on <strong>${unlockDateLabel(rot)}</strong> — check back then!</p>
       </div>
     `;
@@ -1407,13 +1417,13 @@ function openModal(r, dateOverride){
   const today = dateOverride || new Date();
   const saint = saintForDate(today);
   const quote = quoteForDate(today);
-  const fullPeriods = fullPeriodsForDate(today, activeQuarter);
+  const fullPeriods = fullPeriodsForDate(today);
   modalEl.className = 'modal ' + (rot.status !== 'plain' ? rot.status : '');
   modalEl.innerHTML = `
     <button class="close" onclick="closeModal()">✕</button>
     <div class="slide-head">
       <div class="slide-head-info">
-        <div class="slide-rot">📖 Rotation ${rot.r}</div>
+        <div class="slide-rot">📖 ${rotName(rot)}</div>
         <div class="slide-date">${fmtFullDate(today)}</div>
         <div class="slide-periods">${fullPeriods ? `Today's Periods: ${fullPeriods.join(', ')}` : rotDateLabel(rot)}</div>
         ${homeworkHTML(today)}
@@ -1608,29 +1618,17 @@ document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(
 
 // --- One-click "Today's Class" for projecting in the classroom ---
 function findRotationForDate(date){
-  const key = dateKey(date);
-  for(const q of [1, 2]){
-    const entries = buildDayRotationMap(q)[key];
-    if(entries && entries.length) return {quarter: q, rotation: entries[0].rotation};
-  }
+  const entries = buildDayRotationMap()[dateKey(date)];
+  if(entries && entries.length) return {quarter: entries[0].quarter, rotation: entries[0].rotation};
   return null;
 }
 document.getElementById('today-btn').addEventListener('click', () => {
   const found = findRotationForDate(new Date());
   if(!found){
-    alert("No class is scheduled for today in either quarter's calendar yet.");
+    alert("No class is scheduled for today in the calendar yet.");
     return;
   }
-  if(found.quarter !== activeQuarter){
-    activeQuarter = found.quarter;
-    document.querySelectorAll('.quarter-switch button').forEach(b => b.classList.toggle('active', parseInt(b.dataset.qtr, 10) === activeQuarter));
-    document.getElementById('qtr-label').textContent = 'Quarter ' + activeQuarter;
-    document.querySelectorAll('.qtr-block').forEach(el => el.classList.toggle('active', el.dataset.qtr === String(activeQuarter)));
-    currentMonthPos = 0;
-    renderCalendarMonth();
-    renderList();
-  }
-  openModal(found.rotation, new Date());
+  openModal(found.quarter, found.rotation, new Date());
 });
 
 // --- Render one month at a time ---
@@ -1671,21 +1669,21 @@ function renderCalendarMonth(){
       html += `<div class="cal-day out-of-range"><span class="cd-daynum">${day}</span></div>`;
     } else {
       const isSplit = entries.length > 1;
-      const primary = activeRotations().find(x => x.r === entries[0].rotation);
-      const entryRots = entries.map(e => activeRotations().find(x => x.r === e.rotation));
+      const primary = findRotation(entries[0].quarter, entries[0].rotation);
+      const entryRots = entries.map(e => findRotation(e.quarter, e.rotation));
       const allLocked = entryRots.every(r => r && !isRotationUnlocked(r));
       const badge = rotationBadge(primary);
-      const rLabel = entries.map(e => `R${e.rotation}`).join('/');
+      const rLabel = entryRots.map(r => rotShort(r)).join('/');
       const periodsLabel = entries.map(e => `P${e.periods.join(',')}`).join(' · ');
-      const dataEntries = entries.map(e => `${e.rotation}:${e.periods.join(',')}`).join('|');
+      const dataEntries = entries.map(e => `${e.quarter}:${e.rotation}:${e.periods.join(',')}`).join('|');
       const isoDate = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const hwDueToday = !allLocked && dayHasHomeworkDue(d);
       const summaryText = allLocked ? '' : calendarSummary(primary);
       const tip = allLocked
         ? `🔒 Locked — unlocks ${unlockDateLabel(primary)}`
         : isSplit
-        ? `Shared day — ${entries.map(e => `Rotation ${e.rotation} (Periods ${e.periods.join(', ')})`).join(' & ')}`
-        : `Rotation ${primary.r}: ${summaryText}${hwDueToday ? ' — homework due today!' : ''}`;
+        ? `Shared day — ${entries.map(e => `${rotName(findRotation(e.quarter, e.rotation))} (Periods ${e.periods.join(', ')})`).join(' & ')}`
+        : `${rotName(primary)}: ${summaryText}${hwDueToday ? ' — homework due today!' : ''}`;
       html += `<div class="cal-day has-rotation ${rotationColorClass(primary)}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}${hwDueToday ? ' hw-due' : ''}" data-entries="${dataEntries}" data-date="${isoDate}" title="${tip}">
         <span class="cd-top"><span class="cd-daynum">${day}</span>${allLocked ? `<span class="cd-badge">🔒</span>` : (!isSplit && badge ? `<span class="cd-badge">${badge}</span>` : '')}</span>
         <span class="cd-rnum">${allLocked ? '🔒' : rLabel}</span>
@@ -1705,18 +1703,18 @@ function renderCalendarMonth(){
 
 function parseCellEntries(str){
   return str.split('|').map(s => {
-    const [r, p] = s.split(':');
-    return {rotation: parseInt(r, 10), periods: p.split(',').map(Number)};
+    const [q, r, p] = s.split(':');
+    return {quarter: parseInt(q, 10), rotation: parseInt(r, 10), periods: p.split(',').map(Number)};
   });
 }
 
 function openDayPicker(entries, date){
   modalEl.className = 'modal';
   const options = entries.map(e => {
-    const rot = activeRotations().find(x => x.r === e.rotation);
+    const rot = findRotation(e.quarter, e.rotation);
     const locked = !rot || !isRotationUnlocked(rot);
-    return `<button class="picker-option" data-rotation="${e.rotation}">
-      <div class="po-title">Rotation ${e.rotation} — Periods ${e.periods.join(', ')}${locked ? ' 🔒' : ''}</div>
+    return `<button class="picker-option" data-quarter="${e.quarter}" data-rotation="${e.rotation}">
+      <div class="po-title">${rot ? rotName(rot) : `Rotation ${e.rotation}`} — Periods ${e.periods.join(', ')}${locked ? ' 🔒' : ''}</div>
       <div class="po-sub">${locked ? `Unlocks ${unlockDateLabel(rot)}` : (rot ? rot.summary : '')}</div>
     </button>`;
   }).join('');
@@ -1726,7 +1724,7 @@ function openDayPicker(entries, date){
     ${options}
   `;
   modalEl.querySelectorAll('.picker-option').forEach(btn => {
-    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.rotation, 10), date));
+    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.quarter, 10), parseInt(btn.dataset.rotation, 10), date));
   });
   overlayEl.classList.add('show');
 }
@@ -1741,7 +1739,7 @@ calEl.addEventListener('click', (e) => {
   if(!cell) return;
   const entries = parseCellEntries(cell.dataset.entries);
   const date = cell.dataset.date ? parseISODate(cell.dataset.date) : undefined;
-  if(entries.length === 1) openModal(entries[0].rotation, date);
+  if(entries.length === 1) openModal(entries[0].quarter, entries[0].rotation, date);
   else openDayPicker(entries, date);
 });
 
@@ -1757,22 +1755,22 @@ monthNextBtn.addEventListener('click', () => {
 const listEl = document.getElementById('rotation-list');
 function renderList(){
   listEl.innerHTML = '';
-  activeRotations().forEach(rot => {
+  allRotations().forEach(rot => {
     const row = document.createElement('div');
     const locked = !isRotationUnlocked(rot);
     row.className = 'list-row ' + rotationColorClass(rot) + (locked ? ' locked-row' : '');
     row.dataset.tags = rot.tags.join(',');
     row.innerHTML = locked ? `
-      <span class="lr-num">Rotation ${rot.r} 🔒</span>
+      <span class="lr-num">${rotName(rot)} 🔒</span>
       <span class="lr-date">Unlocks ${unlockDateLabel(rot)}</span>
       <span class="lr-summary lr-summary-locked">This one's still under wraps — check back on its unlock date!</span>
     ` : `
-      <span class="lr-num">Rotation ${rot.r}</span>
+      <span class="lr-num">${rotName(rot)}</span>
       <span class="lr-date">${rotDateLabel(rot)}</span>
       <span class="lr-pills">${rotationPillsHTML(rot)}</span>
       ${rot.summary ? `<span class="lr-summary">${rot.summary}</span>` : ''}
     `;
-    row.addEventListener('click', () => openModal(rot.r));
+    row.addEventListener('click', () => openModal(rot.q, rot.r));
     listEl.appendChild(row);
   });
   applyFilter();
@@ -1781,7 +1779,8 @@ function renderList(){
 function applyFilter(){
   const f = currentFilter;
   document.querySelectorAll('.cal-day.has-rotation').forEach(cell => {
-    const rot = activeRotations().find(x => x.r === parseInt(cell.dataset.rotation, 10));
+    const first = parseCellEntries(cell.dataset.entries)[0];
+    const rot = findRotation(first.quarter, first.rotation);
     cell.classList.toggle('dimmed', f !== 'all' && !rot.tags.includes(f));
   });
   document.querySelectorAll('.list-row').forEach(row => {
@@ -1805,21 +1804,23 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
     btn.classList.add('active');
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + btn.dataset.page).classList.add('active');
+    syncQuarterChrome();
   });
 });
 
+// The calendar is one continuous year. The Quarter 1 / Quarter 2 switch only exists on the
+// Quick Links page, where it picks which quarter's links to show.
+function syncQuarterChrome(){
+  const onLinks = document.getElementById('page-links').classList.contains('active');
+  document.querySelector('.quarter-switch').style.display = onLinks ? '' : 'none';
+  document.querySelectorAll('.quarter-switch button').forEach(b => b.classList.toggle('active', parseInt(b.dataset.qtr, 10) === activeQuarter));
+  document.querySelectorAll('.qtr-block').forEach(el => el.classList.toggle('active', el.dataset.qtr === String(activeQuarter)));
+  document.getElementById('qtr-label').textContent = onLinks ? 'Quarter ' + activeQuarter : 'Full Year';
+}
 document.querySelectorAll('.quarter-switch button').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.quarter-switch button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
     activeQuarter = parseInt(btn.dataset.qtr, 10);
-    document.getElementById('qtr-label').textContent = 'Quarter ' + activeQuarter;
-    currentMonthPos = 0;
-    renderCalendarMonth();
-    renderList();
-    document.querySelectorAll('.qtr-block').forEach(el => {
-      el.classList.toggle('active', el.dataset.qtr === String(activeQuarter));
-    });
+    syncQuarterChrome();
   });
 });
 
@@ -1903,6 +1904,11 @@ document.getElementById('teacher-badge').style.display = isTeacherMode() ? 'flex
     currentMonthPos = beforeFirst ? 0 : months.length - 1;
   }
 })();
+{
+  const todayRot = findRotationForDate(new Date());
+  if(todayRot) activeQuarter = todayRot.quarter;
+}
+syncQuarterChrome();
 renderCalendarMonth();
 renderList();
 </script>
