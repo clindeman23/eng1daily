@@ -748,13 +748,18 @@ const rotationsQ1 = [
 ];
 
 const rotationsQ2 = [
-  {r:1, summary:"Study Capitalization, Membean Session, Parts of Speech Narrative, Continue Romeo and Juliet Intro",
+  {r:1, summary:"Study Capitalization, Membean Quiz, Parts of Speech Narrative, Continue Romeo and Juliet Intro",
    grammar:`Study Capitalization — ${link(L.capitalizationSlides,"Slides")} · ${link(L.capitalizationNotes,"Notes")}`,
-   membean:"Do a session of Membean.",
+   membean:"Membean Quiz.",
    writing:`Work on — ${link(L.posCreativeWriting,"Parts of Speech Narrative (Creative Writing Assignment)")}`,
    literature:"Continue Romeo and Juliet intro activities.",
    tags:[]},
-  {r:2, summary:"", tags:[]},
+  {r:2, summary:"Capitalization Quiz, Membean, Parts of Speech Narrative, Romeo and Juliet Literary Terms",
+   grammar:"Capitalization Quiz.",
+   membean:"15 minutes of Membean.",
+   writing:`Work on — ${link(L.posCreativeWriting,"Parts of Speech Narrative (Creative Writing Assignment)")}`,
+   literature:`Romeo and Juliet Literary Terms — ${link(L.rjLitTermsSlides,"Slides")} · ${link(L.rjLitTermsNotes,"Notes")}`,
+   tags:[]},
   {r:3, summary:"", tags:[]},
   {r:4, summary:"", tags:[]},
   {r:5, summary:"", tags:[]},
@@ -871,6 +876,8 @@ const HOMEWORK_ONE_TIME = [
   { name: 'Membean Test', due: {4: '2026-09-30', 7: '2026-10-01'}, inClass: false },
   { name: 'Short Story Test', due: {4: '2026-10-02', 7: '2026-10-02'}, inClass: true },
   { name: 'Bring Book to Class (Romeo and Juliet)', due: {4: '2026-10-09', 7: '2026-10-09'}, inClass: true },
+  { name: 'Membean Quiz', due: {4: '2026-10-08', 7: '2026-10-13'}, inClass: false },
+  { name: 'Capitalization Quiz', due: {4: '2026-10-14', 7: '2026-10-15'}, inClass: true },
 ];
 const HOMEWORK_LOOKAHEAD_DAYS = 14;
 function oneTimeHomeworkFor(item, dateObj){
