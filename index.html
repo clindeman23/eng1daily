@@ -179,6 +179,20 @@ p.section-sub{color:var(--muted);font-size:0.88rem;margin:-10px 0 20px;}
 .cal-day.rc0{background:#f4e6e9;border-color:#c99aa5;color:#782F40;}
 .cal-day.rc1{background:#f7f0dc;border-color:#d9c286;color:#a8842e;}
 .cal-day.rc2{background:#e0f5f3;border-color:#94d3cd;color:#00838f;}
+/* Calendar colors: one color per unique rotation within a month, restarting each month.
+   12 colors so even the busiest month (12 rotations) never repeats one. */
+.cal-day.mc0{background:#f4e6e9;border-color:#c99aa5;color:#782F40;}
+.cal-day.mc1{background:#f7f0dc;border-color:#d9c286;color:#a8842e;}
+.cal-day.mc2{background:#e0f5f3;border-color:#94d3cd;color:#00838f;}
+.cal-day.mc3{background:#e6f0e4;border-color:#a6c9a0;color:#2e6b34;}
+.cal-day.mc4{background:#e3e8f4;border-color:#9fb0d8;color:#28407a;}
+.cal-day.mc5{background:#fbe4ec;border-color:#e8a4bc;color:#a8325e;}
+.cal-day.mc6{background:#fbebdc;border-color:#e3b283;color:#a4540f;}
+.cal-day.mc7{background:#eee5f4;border-color:#bea4d4;color:#5f3382;}
+.cal-day.mc8{background:#e1f0fa;border-color:#94c4e6;color:#1f6a9c;}
+.cal-day.mc9{background:#eef0da;border-color:#c4cb86;color:#6b7316;}
+.cal-day.mc10{background:#eaecef;border-color:#b3b9c4;color:#444d5c;}
+.cal-day.mc11{background:#fde6e1;border-color:#f0a699;color:#b3392a;}
 
 p.period-note{text-align:center;max-width:640px;margin-left:auto;margin-right:auto;}
 .cal-day.split-day{background:repeating-linear-gradient(135deg, var(--card), var(--card) 6px, #f1f3f6 6px, #f1f3f6 12px);}
@@ -985,6 +999,7 @@ function activeMonths(){
 }
 
 const ROTATION_COLOR_COUNT = 3;
+const MONTH_PALETTE_SIZE = 12;
 function rotationColorClass(rot){ return 'rc' + ((rot.g - 1) % ROTATION_COLOR_COUNT); }
 function rotationBadge(rot){
   if(rot.tags.includes('graded')) return '🏆';
@@ -1678,6 +1693,17 @@ function renderCalendarMonth(){
   const daysInMonth = new Date(year, m + 1, 0).getDate();
   const firstDow = new Date(year, m, 1).getDay();
 
+  // Give each unique rotation in this month the next color in the palette (in the order it
+  // first appears); the next month starts back at the first color.
+  const colorOrder = {};
+  let colorCount = 0;
+  for(let day = 1; day <= daysInMonth; day++){
+    (dayMap[dateKey(new Date(year, m, day))] || []).forEach(e => {
+      const key = `${e.quarter}:${e.rotation}`;
+      if(!(key in colorOrder)) colorOrder[key] = colorCount++;
+    });
+  }
+
   let html = `<div class="cal-month">`;
   html += `<div class="cal-weekdays">${WEEKDAY_LABELS.map(w => `<span>${w}</span>`).join('')}</div>`;
   html += `<div class="cal-grid">`;
@@ -1712,7 +1738,7 @@ function renderCalendarMonth(){
         : isSplit
         ? `Shared day — ${entries.map(e => `${rotName(findRotation(e.quarter, e.rotation))} (Periods ${e.periods.join(', ')})`).join(' & ')}`
         : `${rotName(primary)}: ${summaryText}${hwDueToday ? ' — homework due today!' : ''}`;
-      html += `<div class="cal-day has-rotation ${rotationColorClass(primary)}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}${hwDueToday ? ' hw-due' : ''}" data-entries="${dataEntries}" data-date="${isoDate}" title="${tip}">
+      html += `<div class="cal-day has-rotation mc${colorOrder[`${primary.q}:${primary.r}`] % MONTH_PALETTE_SIZE}${isSplit ? ' split-day' : ''}${allLocked ? ' locked-day' : ''}${hwDueToday ? ' hw-due' : ''}" data-entries="${dataEntries}" data-date="${isoDate}" title="${tip}">
         <span class="cd-top"><span class="cd-daynum">${day}</span>${allLocked ? `<span class="cd-badge">🔒</span>` : (!isSplit && badge ? `<span class="cd-badge">${badge}</span>` : '')}</span>
         <span class="cd-rnum">${allLocked ? '🔒' : rLabel}</span>
         <span class="cd-periods">${allLocked ? '' : (summaryText ? summaryText : periodsLabel)}</span>
