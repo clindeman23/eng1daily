@@ -569,6 +569,7 @@ footer{
           <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1ipQDszE2xXSTOV_cYsF_8Pk6E7ZxOf4P3B1D3UKQ4oQ/edit?usp=drive_link"><span class="qlicon">📝</span><span class="qllabel">Capitalization Notes</span><span class="qlarrow">↗</span></a>
           <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://clindeman23.github.io/partsofsentence"><span class="qlicon">📚</span><span class="qllabel">Parts of Sentence Slides</span><span class="qlarrow">↗</span></a>
           <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://docs.google.com/document/d/18bHrcvPB3x8WsmQsf56hLbD6Z1bzPzFMfniAnQIDdg8/edit?usp=drive_link"><span class="qlicon">📝</span><span class="qllabel">Parts of Sentence Notes Worksheet</span><span class="qlarrow">↗</span></a>
+          <a class="qltile c-grammar" target="_blank" rel="noopener" href="https://www.gimkit.com/join/6af213edb349817633965a96"><span class="qlicon">🎮</span><span class="qllabel">Parts of Sentence Study Gimkit</span><span class="qlarrow">↗</span></a>
         </div>
       </div>
 
@@ -580,6 +581,7 @@ footer{
           <a class="qltile c-literature" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1zMljDxavhhZe1Z0AeEsAESXf9TQ3jN193neCp6Ekruk/edit?usp=drive_link"><span class="qlicon">🌳</span><span class="qllabel">Romeo and Juliet Family Tree</span><span class="qlarrow">↗</span></a>
           <a class="qltile c-literature" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1P9tsYGsOFZQRjehXgtetEfF24937tRAgMlWZPBkAgAY/edit?usp=drive_link"><span class="qlicon">💬</span><span class="qllabel">Romeo and Juliet Important Quotes</span><span class="qlarrow">↗</span></a>
           <a class="qltile c-literature" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1FVaF3NNB3OTtsmdYZt6SQpTBEa9q3bFxZMrw6sZN7qc/edit?usp=drive_link"><span class="qlicon">📖</span><span class="qllabel">Romeo and Juliet Study Guide</span><span class="qlarrow">↗</span></a>
+          <a class="qltile c-literature" target="_blank" rel="noopener" href="https://www.gimkit.com/join/6af213d08285457a9e28bce8"><span class="qlicon">🎮</span><span class="qllabel">Act 2 Quiz Study Gimkit</span><span class="qlarrow">↗</span></a>
         </div>
       </div>
 
@@ -627,6 +629,8 @@ const L = {
   specialPersonParagraph: "https://docs.google.com/document/d/1t4z6E11NF1P0gh68H0_fR9fPoMx8mlvzY6g6ySXJ3mA/edit?usp=drive_link",
   capitalizationSlides: "https://docs.google.com/presentation/d/1qLeRpLQhhdpCJ0rA9InJjEvKQxOegG58meIDPZpMfGQ/edit?usp=drive_link",
   partsOfSentenceSlides: "https://clindeman23.github.io/partsofsentence",
+  partsOfSentenceGimkit: "https://www.gimkit.com/join/6af213edb349817633965a96",
+  act2Gimkit: "https://www.gimkit.com/join/6af213d08285457a9e28bce8",
   partsOfSentenceNotes: "https://docs.google.com/document/d/18bHrcvPB3x8WsmQsf56hLbD6Z1bzPzFMfniAnQIDdg8/edit?usp=drive_link",
   capitalizationNotes: "https://docs.google.com/document/d/1ipQDszE2xXSTOV_cYsF_8Pk6E7ZxOf4P3B1D3UKQ4oQ/edit?usp=drive_link",
   posCreativeWriting: "https://docs.google.com/document/d/1nwm7i-ZoHy1_NvTyImrplz6UZrbHYvYi1_pOxDOQ6fc/edit?usp=sharing",
@@ -828,13 +832,13 @@ const rotationsQ2 = [
    literature:"Read Romeo and Juliet.",
    tags:[]},
   {r:12, summary:"Parts of Sentence Study Gimkit, Membean Quiz, Letter to Juliet Graphic Organizer, Continue Romeo and Juliet",
-   grammar:"Parts of Sentence Study Gimkit.",
+   grammar:`${link(L.partsOfSentenceGimkit,"Parts of Sentence Study Gimkit")}`,
    membean:"Membean Quiz.",
    writing:"Letter to Juliet Graphic Organizer day.",
-   literature:"Continue Romeo and Juliet if time.",
+   literature:`Continue Romeo and Juliet if time — ${link(L.act2Gimkit,"Act 2 Quiz Study Gimkit")}`,
    tags:[]},
   {r:13, summary:"Parts of Sentence Study Gimkit, Membean, Letter to Juliet, Romeo and Juliet Act 2 Quiz",
-   grammar:"Parts of Sentence Study Gimkit.",
+   grammar:`${link(L.partsOfSentenceGimkit,"Parts of Sentence Study Gimkit")}`,
    membean:"15 minutes of Membean.",
    writing:"Letter to Juliet.",
    literature:"Romeo and Juliet Act 2 Quiz.",
